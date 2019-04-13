@@ -76,7 +76,7 @@
 
             <li class="{{ ($currentRouteName->getName() == 'page') ? 'active' : '' }}">
                 <a href="{{ route('page.index') }}">
-                    <i class="fa fa-file "></i> <span>Trang</span></a>
+                    <i class="fa fa-file "></i> <span>@lang('page.page')</span></a>
             </li>
 
             <li class="treeview {{ strrpos($currentRouteName->getPrefix(), 'blog')?'active':'' }}">

@@ -55,6 +55,13 @@
                             </div>
                             @endif
 
+                            @if( $data->type == 'textarea' )
+                                <div class="form-group">
+                                    <label for="value">@lang('configurations.value') <span class="text-red">*</span></label>
+                                    <textarea class="form-control" name="value" id="value" cols="30" rows="10">{{ old('value', $data->value ) }}</textarea>
+                                </div>
+                            @endif
+
                             @if( $data->type == 'image' )
                                 <div class="form-group">
                                     <label for="value">@lang('configurations.value') <span class="text-red">*</span></label>

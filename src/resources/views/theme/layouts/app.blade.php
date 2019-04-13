@@ -155,6 +155,7 @@
 
     <script src="{{ url('js/app.js') }}"></script>
     @yield('footer')
+    {!! app('Configuration')->get('tawkto') !!}
 </body>
 </html>
 
