@@ -85,15 +85,15 @@
 
                             <div class="form-group">
                                 <label for="price">@lang('product.price')</label>
-                                <input type="text" class="form-control"
-                                       name="price" id="price" value="{{ old('price') }}" />
+                                <input type="text" class="form-control price"
+                                       name="price" id="price" value="{{ old('price', 0) }}" />
                             </div>
 
 
                             <div class="form-group">
                                 <label for="sale_price">@lang('product.sale_price')</label>
-                                <input type="text" class="form-control"
-                                       name="sale_price" id="sale_price" value="{{ old('sale_price') }}" />
+                                <input type="text" class="form-control price"
+                                       name="sale_price" id="sale_price" value="{{ old('sale_price',0) }}" />
                             </div>
 
 
@@ -287,3 +287,24 @@
     </section>
     <!-- /.content -->
 @stop
+
+@section('footer')
+<script>
+    $(function(){
+        $(".price").each( function (index, item) {
+            if( $(item).val() != '' ){
+                var n = parseInt($(item).val().replace(/\D/g,''),10);
+                $(item).val(n.toLocaleString());
+            }
+
+
+        });
+
+        $(".price").on('keyup', function(){
+            var n = parseInt($(this).val().replace(/\D/g,''),10);
+            $(this).val(n.toLocaleString());
+        });
+    })
+
+</script>
+@endsection

@@ -83,8 +83,6 @@ header{
     }
   }
 
-
-
 }
 
 #header-top{
@@ -201,20 +199,21 @@ MAIN NAV
 
   @include media-breakpoint-up(md){
     height: 100%;
-
     > ul{
       list-style: none;
       margin: 0;
       padding: 0;
-
       > li{
         position: relative;
         float: left;
         border-right: 1px solid rgba(255, 255, 255, 0.5);
-
         &:hover{
           > a{
             background: lighten( $primary, 5% );
+          }
+          >ul{
+            visibility: visible;
+            opacity: 1;
           }
         }
         > a{
@@ -223,7 +222,6 @@ MAIN NAV
           font-weight: 500;
           display: block;
           padding: 0.5rem 1rem;
-
           .menu-icon{
             display: block;
             text-align: center;
@@ -231,21 +229,24 @@ MAIN NAV
           }
         }
 
-        >ul{
+        ul{
           background: #FFF;
           list-style: none;
           padding: 0;
           position: absolute;
-          display: none;
-          left: 100%;
-          top: 0;
-          z-index:999;
-          width: 20rem;
+          visibility: hidden;
+          opacity: 0;
           box-shadow: 1px 1px 9px 1px #aaa;
+          width: 15rem;
           li{
+            line-height: 2.2rem;
             &:hover{
               a{
                 background: #f5f5f5;
+              }
+              ul{
+                visibility: visible;
+                opacity: 1;
               }
             }
             a{
@@ -255,12 +256,19 @@ MAIN NAV
           }
         }
 
-        ul{
-          li{
-            line-height: 2.2rem;
+        >ul{
 
+          left: 0;
+          top: 100%;
+          z-index:999;
+
+          ul{
+            left: 100%;
+            top: 0;
           }
+
         }
+
 
 
 
@@ -284,7 +292,8 @@ MAIN NAV
 #mini-cart{
   > a{
     > i{
-      font-size: 2rem;
+      font-size: 1.5rem;
+      color: #666;
     }
   }
 }
@@ -298,7 +307,8 @@ MAIN NAV
       display: flex;
       align-items: center;
       i{
-        font-size: 2rem;
+        font-size: 1.5rem;
+        color: #666;
       }
     }
 

@@ -1,6 +1,6 @@
 // Fonts
 //@import url('https://fonts.googleapis.com/css?family=Roboto');
-
+@import 'line-awesome/css/line-awesome.css';
 // Variables
 @import 'variables';
 
@@ -81,6 +81,17 @@ $slider-line-height: 10px;
 MAIN
  */
 
+#home-post{
+  .post-item{
+    img{
+      max-width: 5rem;
+    }
+    h3{
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+  }
+}
 
 #home-slider{
   .slider-title{

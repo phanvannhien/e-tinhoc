@@ -1,5 +1,6 @@
 <?php
 return [
+    'duplicate' => 'Copy',
     'dashboard' => 'Bảng chính',
     'appearance' => 'Giao diện',
     'yes' => 'Có',

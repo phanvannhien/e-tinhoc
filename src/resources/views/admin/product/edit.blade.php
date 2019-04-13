@@ -4,11 +4,18 @@
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>Sản phẩm </h1>
+        <h1>
+            @if( $mode == 'edit' )
+                @lang('app.edit') {{ $product->title }}
+            @else
+                @lang('app.duplicate') {{ $product->title }}
+            @endif
+        </h1>
     </section>
     <!-- Main content -->
     <section class="content">
         <form method="POST" action="{{ route('product.update', $product->id ) }}" class="">
+            <input type="hidden" name="mode" value="{{ $mode }}">
             <p class="clearfix">
 
                 <a href="{{ route('product.index') }}" class="btn btn-info btn-sm ">
@@ -41,14 +48,14 @@
 
                             <div class="form-group">
                                 <label for="price">@lang('product.price')</label>
-                                <input type="text" class="form-control"
+                                <input type="text" class="form-control price"
                                        name="price" id="price" value="{{ old('price', $product->price ) }}" />
                             </div>
 
 
                             <div class="form-group">
                                 <label for="sale_price">@lang('product.sale_price')</label>
-                                <input type="text" class="form-control"
+                                <input type="text" class="form-control price"
                                        name="sale_price" id="sale_price" value="{{ old('sale_price', $product->sale_price ) }}" />
                             </div>
 
@@ -243,5 +250,24 @@
     </section>
     <!-- /.content -->
 
-
 @stop
+
+@section('footer')
+    <script>
+        $(function(){
+
+            $(".price").each( function (index, item) {
+
+                var n = parseInt($(item).val().replace(/\D/g,''),10);
+                $(item).val(n.toLocaleString());
+
+            });
+
+            $(".price").on('keyup', function(){
+                var n = parseInt($(this).val().replace(/\D/g,''),10);
+                $(this).val(n.toLocaleString());
+            });
+        })
+
+    </script>
+@endsection

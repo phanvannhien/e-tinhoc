@@ -4,6 +4,10 @@
         $slider = Cache::remember('slider', 300 , function () {
             return \App\Models\Slider::where('status',1)->get();
         });
+
+        $posts = Cache::remember('home-post', 300 , function () {
+            return \App\Models\Blog::where('blog_status',1)->orderBy('created_at','DESC')->limit(3)->get();
+        });
     @endphp
     <section id="" class="mb-4">
         <div class="container">
@@ -17,8 +21,19 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-4">
+                    <div id="home-post" class=" ">
+                        <h3>Tin mới</h3>
+                        @foreach( $posts as $blog )
+                        <div class="post-item clearfix border p-2 bg-white mb-2">
+                            <a href="{{ $blog->getUrl() }}">
+                                <img src="{{ $blog->blog_thumbnail }}" alt="{{ $blog->blog_title }}" class="mr-2 img-fluid float-left">
+                                <h3>{{ $blog->blog_title }}</h3>
 
+                            </a>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>

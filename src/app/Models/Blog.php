@@ -32,7 +32,12 @@ class Blog extends Model
             'blogcategory_id' );
     }
 
-
+    public function getUrl(){
+        return route('blog.detail', [
+            'id' => $this->id,
+            'slug' => $this->slug
+        ]);
+    }
 
 
 }

@@ -42,15 +42,15 @@
                                         {{ auth()->user()->user_name }}
                                     </a>
                                     <ul class="user-menu">
-                                        <li class=""><a href="{{ route('customer.profile') }}"><i class="fa fa-user"></i> @lang('customer.profile')</a></li>
-                                        <li class=""><a href="{{ route('customer.order') }}"><i class="fa fa-cubes"></i> @lang('customer.order')</a></li>
-                                        <li class=""><a href="{{ route('customer.address') }}"><i class="fa fa-map-marker"></i> @lang('customer.address')</a></li>
-                                        <li class=""><a href="{{ route('customer.password') }}"><i class="fa fa-unlock"></i> @lang('customer.password')</a></li>
+                                        <li class=""><a href="{{ route('customer.profile') }}"><i class="la la-user"></i> @lang('customer.profile')</a></li>
+                                        <li class=""><a href="{{ route('customer.order') }}"><i class="la la-cubes"></i> @lang('customer.order')</a></li>
+                                        <li class=""><a href="{{ route('customer.address') }}"><i class="la la-map-marker"></i> @lang('customer.address')</a></li>
+                                        <li class=""><a href="{{ route('customer.password') }}"><i class="la la-unlock"></i> @lang('customer.password')</a></li>
                                         <li class="">
                                             <form action="{{ route('logout') }}" method="POST">
                                                 @csrf
                                                 <a onclick="$(this).parent('form').submit()"
-                                                   href="#"><i class="fa fa-sign-out"></i> @lang('customer.logout')</a>
+                                                   href="#"><i class="la la-sign-out"></i> @lang('customer.logout')</a>
                                             </form>
 
                                         </li>
@@ -59,7 +59,7 @@
                             @else
                                 <div id="user-wrap">
                                     <a href="#" class="btn btn-sm" data-toggle="modal" data-target="#modal-login">
-                                        <i class="fa fa-user"></i>
+                                        <i class="la la-user"></i>
                                         <span class="d-none d-md-flex"> @lang('customer.login')</span>
 
                                     </a>
@@ -68,7 +68,7 @@
                         </div>
                         <div id="mini-cart">
                             <a href="#" id="open-mini-cart">
-                                <i class="fa fa-shopping-cart"></i>
+                                <i class="la la-shopping-cart"></i>
                                 <span id="total-cart-item" class="badge badge-warning text-white">{{ Cart::getTotalQuantity() }}</span>
                             </a>
                         </div>

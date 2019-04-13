@@ -23,6 +23,7 @@ class AdminController extends Controller
 
     public function flushCache(){
         Cache::flush();
+
         return back()->with('status', trans('app.success'));
     }
 

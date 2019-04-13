@@ -133,10 +133,17 @@ class ProductController extends Controller
 
     }
 
-    public function edit( Request $request, $id ){
+    public function edit( Request $request, $id, $mode = 'edit' ){
+
         $product = Product::findOrFail( $id );
+        if( $request->has('mode') && $request->input('mode') == 'clone' ){
+            $mode = 'clone';
+        }else{
+            $mode = 'edit';
+        }
+
         $categories =  Category::withDepth()->get()->toTree();
-        return view('admin.product.edit', compact('product','categories'));
+        return view('admin.product.edit', compact('product','categories','mode'));
 
     }
 
@@ -152,52 +159,58 @@ class ProductController extends Controller
             return back()->withErrors ( $validator )->withInput();
         }
 
-        $product  = Product::findOrFail($id);
-        $product->title = $request->input('title');
-
-        $product->url = $request->input('url');
-        $product->thumbnail = $request->input('thumbnail');
-        $product->brand_id = $request->input('brand_id');
-        $product->sku = $request->input('sku');
-
-        $product->price = $request->input('price');
-        $product->sale_price = $request->input('sale_price');
-        $product->product_type = $request->input('product_type');
-
-        $product->slug = Str::slug($request->input('slug'));
-     
-        if( $request->has('is_new') ){
-            $product->is_new = 1;
-        }
-
-        if( $request->has('is_featured') ){
-            $product->is_featured = 1;
-        }
-
-        // content
-        $product->sort_description = $request->input('sort_description');
-        $product->description = $request->input('description');
-
-        // seo
-        $product->meta_title = $request->input('meta_title');
-        $product->meta_keyword = $request->input('meta_keyword');
-        $product->meta_description = $request->input('meta_description');
-
-        //shipping
-        $product->width = $request->input('width');
-        $product->height = $request->input('height');
-        $product->weight = $request->input('weight');
-        $product->depth = $request->input('depth');
-
-        $product->status = $request->input('status');
 
         try{
             DB::beginTransaction();
-            if( $product->save() ){
-                $product->categories()->detach();
-                $product->categories()->attach( $request->input('cat_id') );
 
-                // save galleries
+            if( $request->has('mode') && $request->input('mode') == 'clone'){
+                $product = new Product();
+            }else{
+                $product  = Product::findOrFail($id);
+            }
+
+            $product->title = $request->input('title');
+
+            $product->url = $request->input('url');
+            $product->thumbnail = $request->input('thumbnail');
+            $product->brand_id = $request->input('brand_id');
+            $product->sku = $request->input('sku');
+
+            $product->price = $request->input('price');
+            $product->sale_price = $request->input('sale_price');
+            $product->product_type = $request->input('product_type');
+
+            $product->slug = Str::slug($request->input('slug'));
+
+            if( $request->has('is_new') ){
+                $product->is_new = 1;
+            }
+
+            if( $request->has('is_featured') ){
+                $product->is_featured = 1;
+            }
+
+            // content
+            $product->sort_description = $request->input('sort_description');
+            $product->description = $request->input('description');
+
+            // seo
+            $product->meta_title = $request->input('meta_title');
+            $product->meta_keyword = $request->input('meta_keyword');
+            $product->meta_description = $request->input('meta_description');
+
+            //shipping
+            $product->width = $request->input('width');
+            $product->height = $request->input('height');
+            $product->weight = $request->input('weight');
+            $product->depth = $request->input('depth');
+
+            $product->status = $request->input('status');
+
+
+
+            if( $product->save() ){
+
                 $arrGalleries = [];
                 if( $request->has('galleries') ){
                     foreach ( $request->get('galleries') as $img){
@@ -205,14 +218,37 @@ class ProductController extends Controller
                     }
                 }
 
-                if( count( $arrGalleries ) ){
-                    $product->galleries()->delete();
-                    $product->galleries()->createMany($arrGalleries);
+                // if clone
+                if( $request->has('mode') && $request->input('mode') == 'clone'){
+
+                    // Save categories
+                    $product->categories()->attach( $request->input('cat_id') );
+
+                    // save galleries
+                    if( count( $arrGalleries ) ){
+                        $product->galleries()->createMany($arrGalleries);
+                    }
+                    // end save galleries
+
+                }else {// if edit
+
+                    // save categories
+                    $product->categories()->detach();
+                    $product->categories()->attach( $request->input('cat_id') );
+
+                    // save galleries
+                    if( count( $arrGalleries ) ){
+                        $product->galleries()->delete();
+                        $product->galleries()->createMany($arrGalleries);
+                    }
+
                 }
+
 
                 DB::commit();
                 return redirect()->route( 'product.edit', $product->id )
                     ->with('status', trans('app.success') );
+
             }
         }catch ( \Exception $e ){
             dd($e);

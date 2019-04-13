@@ -32,10 +32,10 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <td><input type="checkbox" name="ids[]" class="i-checks check-all"></td>
-                                <td>@lang('product.title')</td>
-                                <td>@lang('product.thumbnail')</td>
-                                <td>@lang('product.category')</td>
+                                <th width="50"><input type="checkbox" name="ids[]" class="i-checks check-all"></th>
+                                <th width="100">@lang('product.thumbnail')</th>
+                                <th>@lang('product.title')</th>
+                                <th>@lang('product.category')</th>
 
                             </tr>
                             </thead>
@@ -43,14 +43,18 @@
                             @foreach( $data as $item )
                                 <tr id="row-{{ $item->id }}" >
                                     <td><input type="checkbox" class="data-id i-checks" name="id[]" value="{{ $item->id }}"></td>
+                                    <td><img src="{{ $item->thumbnail }}" width="50" alt=""></td>
                                     <td>
                                         <a href="#">{{ $item->title }}</a>
                                         <br>
                                         <a href="{{ route('product.edit', $item->id ) }}" class="">
-                                                <i class="fa fa-edit"></i> {{ trans('app.edit') }}</a>
+                                                <i class="fa fa-edit"></i> {{ trans('app.edit') }}</a> |
+
+                                        <a href="{{ route('product.edit', [ 'id' => $item->id, 'mode' => 'clone' ]) }}" class="">
+                                            <i class="fa fa-copy"></i> {{ trans('app.duplicate') }}</a>
 
                                     </td>
-                                    <td><img src="{{ $item->thumbnail }}" width="50" alt=""></td>
+
                                     <td>
                                         {!! $item->getCategories() !!}
                                     </td>
