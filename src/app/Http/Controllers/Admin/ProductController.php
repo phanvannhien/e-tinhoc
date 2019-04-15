@@ -69,8 +69,8 @@ class ProductController extends Controller
         $product->thumbnail = $request->input('thumbnail');
         $product->brand_id = $request->input('brand_id');
         $product->sku = $request->input('sku');
-        $product->price = str_replace(',','',$request->input('price'));
-        $product->sale_price = str_replace(',','',$request->input('sale_price'));
+        $product->price = str_replace([',','.'],'',$request->input('price'));
+        $product->sale_price = str_replace([',','.'],'',$request->input('sale_price'));
 
         $product->product_type = $request->input('product_type');
 
@@ -176,8 +176,8 @@ class ProductController extends Controller
             $product->brand_id = $request->input('brand_id');
             $product->sku = $request->input('sku');
 
-            $product->price = str_replace(',','',$request->input('price'));
-            $product->sale_price = str_replace(',','',$request->input('sale_price'));
+            $product->price = str_replace([',','.'],'',$request->input('price'));
+            $product->sale_price = str_replace([',','.'],'',$request->input('sale_price'));
             $product->product_type = $request->input('product_type');
 
             $product->slug = Str::slug($request->input('slug'));
