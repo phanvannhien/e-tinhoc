@@ -1,6 +1,13 @@
 <?php
 
 return [
+    'user_id' => 'Khách hàng',
+    'is_guest' => 'Khách vãng lai',
+    'shipping_full_name' => 'Tên người nhận',
+    'shipping_email' => 'Email người nhận',
+    'shipping_phone' => 'SDT người nhận',
+    'shipping_title' => 'Hình thức giao hàng',
+    'payment_title' => 'Hình thức thanh toán',
     'order_info' => 'Thông tin đơn hàng',
     'note' => 'Ghi chú',
     'edit_order' => 'Sửa giỏ hàng',

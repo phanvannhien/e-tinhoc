@@ -211,6 +211,9 @@ Route::group([
                 'uses' => 'Admin\SysUserController@save_change_password'));
             // Configuration
             Route::resource('configuration','Admin\ConfigurationController');
+
+            Route::resource('email-template','Admin\EmailTemplateController');
+
             Route::resource('sys_user','Admin\SysUserController');
 
             Route::resource('role','Admin\RoleController');

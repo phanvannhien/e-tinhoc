@@ -9,10 +9,16 @@ return[
         'seo' => 'SEO',
         'product' => 'Product',
         'blog' => 'Blog',
+        'email' => 'Email'
     ],
     'type' => [
         'text',
         'textarea',
         'image'
+    ],
+    'email_template_group' => [
+        'customer' => 'Khách hàng',
+        'order' => 'Đơn hàng',
+
     ]
 ];

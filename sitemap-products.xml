@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="/vendor/sitemap/styles/xml.xsl" type="text/xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+	<url>
+	<loc>http://tinhoc.local/dien-thoai-samsung-galaxy-s10-p23.html</loc>
+		<priority>0.5</priority>
+		<lastmod>2019-04-13T20:37:36+07:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+	<loc>http://tinhoc.local/laptop-apple-macbook-air-mree2sa-a-p22.html</loc>
+		<priority>0.5</priority>
+		<lastmod>2019-04-13T21:11:21+07:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+	<loc>http://tinhoc.local/chuot-co-day-genius-dx-125-den-p21.html</loc>
+		<priority>0.5</priority>
+		<lastmod>2019-04-13T20:28:09+07:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+	<loc>http://tinhoc.local/laptop-dell-inspiron-3576-p20.html</loc>
+		<priority>0.5</priority>
+		<lastmod>2019-04-13T20:23:19+07:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+	<loc>http://tinhoc.local/laptop-asus-vivobook-x507uf-p19.html</loc>
+		<priority>0.5</priority>
+		<lastmod>2019-04-13T21:11:01+07:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
 </urlset>
 

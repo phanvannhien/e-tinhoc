@@ -198,6 +198,13 @@
                             <i class="fa fa-angle-right"></i> @lang('configurations.configurations')
                         </a>
                     </li>
+                    <li class="{{ ($currentRouteName->getName() == 'email-template.index') ? 'active' : '' }}">
+                        <a href="{{ route('email-template.index') }}">
+                            <i class="fa fa-angle-right"></i> @lang('email-template.email')
+                        </a>
+                    </li>
+
+
                     <li class="{{ ($currentRouteName->getName() == 'sys_user.index') ? 'active' : '' }}">
                         <a href="{{ route('sys_user.index') }}">
                             <i class="fa fa-angle-right"></i> @lang('sys_user.user')
