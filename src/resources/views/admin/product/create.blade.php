@@ -140,7 +140,7 @@
                                 </p>
 
                                 <div id="galleries-wrap" class="clearfix">
-                                    @if( count(old('galleries')) )
+                                    @if( old('galleries') )
                                         @foreach( old('galleries') as $img )
                                             <div class="text-center col-sm-3">
                                                 <img width="100" src="{{$img->image_url}}">
