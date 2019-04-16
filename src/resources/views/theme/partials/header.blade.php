@@ -38,7 +38,7 @@
                             @if( Auth::check() )
                                 <div id="user-wrap">
                                     <a href="{{ route('customer.dashboard') }}">
-                                        <i class="fa fa-user"></i>
+                                        <i class="la la-user"></i>
                                         {{ auth()->user()->user_name }}
                                     </a>
                                     <ul class="user-menu">

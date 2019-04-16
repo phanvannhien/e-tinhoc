@@ -84,9 +84,13 @@
                             <label for="">@lang('user.role')</label>
                             <select name="role" id="" class="form-control">
                                 <option value="">@lang('app.select')</option>
-                                @foreach( \App\Models\Role::all() as $role )
-                                <option {{ $user->hasRole($role->name) ? 'selected' : '' }} value="{{ $role->id }}">{{ $role->display_name }}</option>
-                                @endforeach
+                                @if( count($roles) )
+                                    @foreach( $roles as $role )
+                                    <option {{ $role->name ? 'selected' : '' }}
+                                            value="{{ $role->id }}">{{ $role->display_name }}</option>
+
+                                    @endforeach
+                                @endif
                             </select>
                         </div>
 

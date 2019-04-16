@@ -1,5 +1,9 @@
 <?php
 return [
+    'view_website' => 'Xem Website',
+    'generate_sitemap' => 'Tạo sitemap',
+    'clear_cache' => 'Xoá Cache',
+    'system' => 'Cấu hình',
     'duplicate' => 'Copy',
     'dashboard' => 'Bảng chính',
     'appearance' => 'Giao diện',

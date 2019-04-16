@@ -3,7 +3,7 @@
     <div id="mini-cart-content">
     @foreach( Cart::getContent()->toArray() as $key => $product )
         <div class="mini-cart-item clearfix">
-            <a href="#" class="remove-item-minicart" data-pid="{{ $key }}"><i class="fa fa-trash"></i></a>
+            <a href="#" class="remove-item-minicart" data-pid="{{ $key }}"><i class="la la-trash"></i></a>
             <img src="{{ $product['attributes']['image'] }}" class="img-fluid"  alt="">
             <div class="mini-cart-data">
                 <a href="{{ route('product.detail', [ 'id' => $key, 'slug' => $product['attributes']['slug'] ]) }}">

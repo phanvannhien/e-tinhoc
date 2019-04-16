@@ -11,5 +11,4 @@ class Role extends EntrustRole
     protected $table = 'roles';
 
 
-
 }

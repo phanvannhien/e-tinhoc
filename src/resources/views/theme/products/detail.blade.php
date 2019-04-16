@@ -48,14 +48,14 @@
 
                                 <div class="clearfix mb-3">
                                     <div class="row">
-                                        <div class="col">
+                                        <div class="col-sm-6">
                                             <a data-pid="{{ $product->id }}" rel="nofollow" target="_blank" href="#"
-                                               class="btn-add-cart btn btn-block btn-lg btn-radius btn-outline-danger" >
+                                               class="btn-add-cart btn btn-block btn-lg btn-radius btn-outline-danger mb-3 mb-sm-0" >
                                                 <i class="fa fa-cart-plus"></i>
                                                 @lang('product.add_cart')
                                             </a>
                                         </div>
-                                        <div class="col">
+                                        <div class="col-sm-6">
                                             <form action="{{ route('purchase') }}" method="post">
                                                 {{ csrf_field()  }}
                                                 <input type="hidden" name="pid" value="{{ $product->id }}">

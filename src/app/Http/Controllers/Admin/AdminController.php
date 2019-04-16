@@ -17,7 +17,8 @@ use Spatie\Sitemap\SitemapGenerator;
 class AdminController extends Controller
 {
     public function index(){
-        return view('admin.dashboard');
+        $orders = App\Models\Order::where('status','waiting')->orderBy('created_at', 'DESC')->paginate();
+        return view('admin.dashboard' , compact('orders'));
     }
 
 

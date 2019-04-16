@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'created_at' => 'Ngày đặt hàng',
+    'order' => 'Đơn hàng',
     'user_id' => 'Khách hàng',
     'is_guest' => 'Khách vãng lai',
     'shipping_full_name' => 'Tên người nhận',

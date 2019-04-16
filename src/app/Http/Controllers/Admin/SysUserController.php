@@ -9,6 +9,9 @@ use App\Http\Controllers\Controller;
 use Validator;
 use Hash;
 
+use App\Models\Role;
+use App\Models\Permission;
+
 class SysUserController extends Controller
 {
     public function index(){
@@ -48,7 +51,8 @@ class SysUserController extends Controller
 
     public function edit($id){
         $user = Admin::findOrFail($id);
-        return view('admin.sysusers.edit', compact('user'));
+        $roles = Role::all();
+        return view('admin.sysusers.edit', compact('user','roles' ));
     }
 
     public function update(Request $request, $id){

@@ -55,5 +55,5 @@
     </script>
     @yield('header')
 </head>
-<body class="skin-blue sidebar-mini">
+<body class="skin-red sidebar-mini">
 <div id="app" class="wrapper">

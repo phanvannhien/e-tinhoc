@@ -2,7 +2,7 @@
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>@lang('pages.pages')</h1>
+        <h1>@lang('order.order')</h1>
     </section>
     <!-- Main content -->
     <section class="content">
@@ -19,7 +19,7 @@
                 </div>
                 <hr>
 
-                <form class="form-inline" action="{{ route('page.index') }}">
+                <form class="form-inline" action="{{ route('order.index') }}">
                     <div class="form-group">
                         <input type="text" name="user_id" value="{{ request('user_id') }}" class="form-control" placeholder="@lang('order.user_id')" />
                     </div>
@@ -32,6 +32,7 @@
                     <thead>
                     <tr>
                         <th width="50"></th>
+                        <th width="50">ID</th>
                         <th>@lang('order.user_id')</th>
                         <th>@lang('order.is_guest')</th>
                         <th>@lang('order.shipping_full_name')</th>
@@ -47,15 +48,17 @@
                     @foreach( $data as $item )
                         <tr id="row-{{ $item->id }}">
                             <td><input type="checkbox" class="data-id i-checks" name="id[]" value="{{ $item->id }}"></td>
+                            <td>{{ $item->id }}</td>
                             <td>
                                 <a href="#">{{ $item->customer->full_name }}</a> <br/>
                                 <a href="{{ route('order.show', $item->id ) }}" class="">
-                                    <i class="fa fa-eye"></i> {{ trans('app.view') }}</a>
+                                    <i class="fa fa-eye"></i> {{ trans('app.view') }}
+                                </a>
                             </td>
                             <td>{{ $item->is_guest }}</td>
                             <td>{{ $item->shipping_full_name }}</td>
                             <td><a href="mailto:{{ $item->shipping_email }}">{{ $item->shipping_email }}</a></td>
-                            <td><a href="tel{{ $item->shipping_phone }}">{{ $item->shipping_phone }}</a></td>
+                            <td><a href="tel:{{ $item->shipping_phone }}">{{ $item->shipping_phone }}</a></td>
                             <td>{{ $item->shipping_title }}</td>
                             <td>{{ $item->payment_title }}</td>
                             <td>{{ number_format($item->total) }}</td>

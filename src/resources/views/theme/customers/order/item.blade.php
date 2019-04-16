@@ -6,7 +6,7 @@
         @lang('order.id'): {{ $order->id }} <br/>
         @lang('order.date'): {{ $order->created_at }} <br/>
         @lang('order.status'):
-        <span class="badge badge-warning">{{ $order->status }}</span> <br/>
+        <span class="badge badge-warning">{{ $order->getStatus() }}</span> <br/>
         @lang('order.total') <span class="price">{{ number_format($order->total).config('product.price_suffix') }}</span>
 
     </p>

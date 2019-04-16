@@ -96,7 +96,7 @@ class EmailTemplateController extends Controller
     public function show( $id ){
         $order = Order::first();
         $template = MailTemplate::findOrFail($id);
-        $class = 'App\Mail\OrderWaiting';
+        $class = $template->template_class;
         return new $class( $order );
     }
 

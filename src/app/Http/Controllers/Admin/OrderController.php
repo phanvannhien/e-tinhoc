@@ -14,4 +14,19 @@ class OrderController extends Controller
         return view('admin.orders.index', compact('data'));
     }
 
+    public function show( $id ){
+        $order = Order::findOrFail( $id )->load('customer')->load('items');
+        //$order = $order->load('customer');
+
+        return view('admin.orders.show', compact('order') );
+    }
+
+    public function changeStatus( Request $request ){
+        $order = Order::findOrFail( $request->input('id') );
+        if( $order->status !=  $request->input('status') ){
+            $order->status = $request->input('status');
+            $order->save();
+        }
+        return back()->with( 'status', trans('app.success') );
+    }
 }

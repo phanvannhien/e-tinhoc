@@ -3,7 +3,7 @@
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>Slider</h1>
+        <h1>@lang('client.client')</h1>
     </section>
     <!-- Main content -->
     <section class="content">
@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="url">@lang('slider.url')</label>
+                        <label for="url">@lang('client.url')</label>
                         <input type="text" class="form-control"
                                name="url" id="url" value="{{ old('url', $client->url) }}" required/>
                     </div>

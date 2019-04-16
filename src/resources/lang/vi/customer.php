@@ -1,6 +1,13 @@
 <?php
 
 return [
+    'day' => 'Ngày sinh',
+    'month' => 'Tháng sinh',
+    'year' => 'Năm sinh',
+    'matp' => 'Thành phố',
+    'maqh' => 'Quận/ Huyện',
+    'gender' => 'Giới tính',
+    'customer' => 'Khách hàng',
     'favorite' => 'Yêu thích',
     'address' => 'Địa chỉ',
     'no_address' => 'Bạn không có địa chỉ',
@@ -15,6 +22,7 @@ return [
     'user_name' => 'Tên đăng nhập',
     'logout' => 'Đăng xuất',
     'phone' => 'Số điện thoại',
+    'current_password' => 'Mật khẩu hiện tại',
     'password' => 'Mật khẩu',
     'login' => 'Đăng nhập',
     'register' => 'Đăng ký',

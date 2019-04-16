@@ -153,6 +153,12 @@
     @endif
     @include('theme.cart.popup-cart')
 
+    @if( Agent::isMobile() )
+    <div id="mobile-nav">
+        {!! App\Utils\Category::renderMenuHTML( $primaryNav, 'primary-menu' ) !!}
+    </div>
+    @endif
+
     <script src="{{ url('js/app.js') }}"></script>
     @yield('footer')
     {!! app('Configuration')->get('tawkto') !!}

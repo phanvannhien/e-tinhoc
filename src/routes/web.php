@@ -125,7 +125,11 @@ Route::group([
     ], function(){
 
         Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
+        Route::get('/api/report','Admin\AdminController@report')->name('admin.report');
         Route::get('logout', 'Admin\LoginController@logout')->name('admin.logout');
+
+
+
 
         // Product
         Route::group([
@@ -146,6 +150,7 @@ Route::group([
         });
 
         Route::resource('order','Admin\OrderController');
+        Route::post('order-change-status','Admin\OrderController@changeStatus')->name('order.change_status');
 
         Route::resource('contact','Admin\ContactController');
 

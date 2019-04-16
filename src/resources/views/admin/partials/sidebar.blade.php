@@ -35,7 +35,7 @@
 
             <li class="{{ ($currentRouteName->getName() == 'order.index') ? 'active' : '' }}">
                 <a href="{{ route('order.index') }}">
-                    <i class="fa fa-first-order"></i> <span>@lang('order.order')</span></a>
+                    <i class="fa fa-shopping-bag"></i> <span>@lang('order.order')</span></a>
             </li>
 
             <li class="treeview {{ strrpos($currentRouteName->getPrefix(), 'product') ? 'active' : '' }}">
@@ -76,7 +76,7 @@
 
             <li class="{{ ($currentRouteName->getName() == 'page') ? 'active' : '' }}">
                 <a href="{{ route('page.index') }}">
-                    <i class="fa fa-file "></i> <span>@lang('page.page')</span></a>
+                    <i class="fa fa-file "></i> <span>@lang('pages.pages')</span></a>
             </li>
 
             <li class="treeview {{ strrpos($currentRouteName->getPrefix(), 'blog')?'active':'' }}">
@@ -146,7 +146,7 @@
 
                     <li class="">
                         <a href="{{ route('store.index') }}">
-                            <i class="fa fa-angle-right"></i> @lang('store.store')
+                            <i class="fa fa-angle-right"></i> @lang('inventory.inventory')
                         </a>
                     </li>
 
@@ -200,7 +200,7 @@
                     </li>
                     <li class="{{ ($currentRouteName->getName() == 'email-template.index') ? 'active' : '' }}">
                         <a href="{{ route('email-template.index') }}">
-                            <i class="fa fa-angle-right"></i> @lang('email-template.email')
+                            <i class="fa fa-angle-right"></i> @lang('email_template.email_template')
                         </a>
                     </li>
 
@@ -221,12 +221,13 @@
                     </li>
                 </ul>
             </li>
+                <hr>
 
             <li>
-                <a href="{{ route('generate.sitemap') }}">Generate Sitemap</a>
+                <a href="{{ route('generate.sitemap') }}"><i class="fas fa-file-alt"></i> @lang('app.generate_sitemap')</a>
             </li>
             <li>
-                <a href="{{ route('flush.cache') }}">Flush Cache</a>
+                <a href="{{ route('flush.cache') }}"><i class="fas fa-eraser"></i> @lang('app.clear_cache')</a>
             </li>
 
         </ul>

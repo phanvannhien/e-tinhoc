@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'price_suffix' => 'VND',
+    'price_suffix' => 'đ',
     'type' => [
         'simple',
         'configurable'

@@ -16,12 +16,12 @@
                         <div class="order-info mb-4">
                             <a href="{{ route('customer.order') }}" class="float-right"><i class="la la-cubes"></i> @lang('customer.order')</a>
                             <h3 class="text-uppercase border-bottom pb-2 mb-3">@lang('order.customer_shipping_information')</h3>
-                            <p class="badge badge-info text-white"> @lang('order.status') {{ $order->status }}</p>
+                            <p class="badge badge-info text-white"> @lang('order.status'): {{ $order->getStatus() }}</p>
                             <p>
                                 <i class="la la-user"></i> {{ $order->shipping_full_name }} <br/>
                                 <i class="la la-envelope"></i> {{ $order->shipping_email }}<br/>
                                 <i class="la la-phone"></i> {{ $order->shipping_phone }}<br/>
-                                <i class="la la-map-marker"></i> {{ $order->shipping_address }}, {{ $order->district->name }}, {{ $order->city->name }}
+                                <i class="la la-map-marker"></i> {{ $order->getShippingAddress() }}
                             </p>
                         </div>
 

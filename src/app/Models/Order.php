@@ -9,22 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
 
-    public $status = [
-        'waiting',
-        'processing',
-        'shipping',
-        'cancel',
-        'done',
-
-    ];
-
     use Filterable;
 
     public function getStatus(){
-        return $this->status;
+        return config('order.status')[$this->status];
     }
-
-
 
     //
     public function items(){
@@ -43,7 +32,6 @@ class Order extends Model
         return $this->belongsTo( District::class, 'maqh','maqh'  )->first();
     }
     public function getShippingAddress(){
-
         return $this->shipping_address.', '.$this->district()->name.', '.$this->city()->name;
     }
 

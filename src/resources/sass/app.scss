@@ -35,7 +35,9 @@ $slider-line-height: 10px;
  }
 
 
-
+#app{
+  overflow: hidden;
+}
 
 .btn-radius{
   border-radius: 2.5rem;
