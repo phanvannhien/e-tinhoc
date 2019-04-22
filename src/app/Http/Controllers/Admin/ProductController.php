@@ -104,11 +104,13 @@ class ProductController extends Controller
             DB::beginTransaction();
             if( $product->save() ){
                 // Save categories
-                $product->categories()->attach( $request->input('cat_id') );
+                if( count($request->input('cat_id')) ){
+                    $product->categories()->attach( $request->input('cat_id') );
+                }
 
                 // save galleries
                 $arrGalleries = [];
-                if( $request->has('galleries') ){
+                if( $request->has('galleries') && count( $arrGalleries ) ){
                     foreach ( $request->get('galleries') as $img){
                         array_push($arrGalleries, ['image_url' => $img] );
                     }
@@ -233,9 +235,12 @@ class ProductController extends Controller
                 }else {// if edit
 
                     // save categories
-                    $product->categories()->detach();
-                    $product->categories()->attach( $request->input('cat_id') );
+                    if( count($request->input('cat_id')) ){
+                        $product->categories()->detach();
+                        $product->categories()->attach( $request->input('cat_id') );
+                    }
 
+                
                     // save galleries
                     if( count( $arrGalleries ) ){
                         $product->galleries()->delete();

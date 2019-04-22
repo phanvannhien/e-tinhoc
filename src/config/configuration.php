@@ -17,8 +17,8 @@ return[
         'image'
     ],
     'email_template_group' => [
-        'customer' => 'Khách hàng',
-        'order' => 'Đơn hàng',
+        'customer' => 'Customer',
+        'order' => 'Order',
 
     ]
 ];

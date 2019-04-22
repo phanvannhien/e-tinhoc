@@ -235,6 +235,7 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <select class="form-control" name="brand_id" id="brand_id">
+                                    <option value="">Select</option>
                                     @foreach( \App\Models\Brand::all()  as $brand )
                                         <option {{ old('brand_id') == $brand->id ? 'selected' : '' }}
                                                 value="{{ $brand->id }}">{{ $brand->brand_name }}</option>

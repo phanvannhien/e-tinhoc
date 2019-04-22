@@ -17,7 +17,10 @@ class CreateMailTemplatesTable extends Migration
             $table->increments('id');
             $table->string('template_name');
             $table->text('template_content');
-            $table->string('template_group');
+            $table->text('template_class');
+            $table->text('mail_from');
+            $table->text('mail_cc');
+            $table->string('template_group')->default('order');
             $table->timestamps();
         });
     }
