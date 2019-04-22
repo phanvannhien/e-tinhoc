@@ -96,7 +96,7 @@
                     <!-- end product sheet -->
 
                 </div>
-
+                @if( $product->brand )
                 <div id="product-brand" class="border-top py-3">
 
                     <img src="{{ $product->brand->brand_logo }}"
@@ -109,6 +109,7 @@
 
                 </div>
                 <!-- end product brand -->
+                @endif
 
 
             </div>
