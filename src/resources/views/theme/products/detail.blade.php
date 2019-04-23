@@ -22,9 +22,7 @@
                     <!-- end product media -->
                     <div id="product-sheet" class="col-lg-6">
                         <h1 class="product-name">{{ $product->title }}</h1>
-                        <div class="product-meta">
-                            <span>SKU: </span> <span id="sku">{{ $product->sku }}</span>
-                        </div>
+                        
                         <div class="product-price bg-dark-50">
                             {!! $product->getPriceHTML() !!}
                         </div>
