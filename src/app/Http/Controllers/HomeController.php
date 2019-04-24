@@ -89,6 +89,9 @@ class HomeController extends Controller
     }
 
     public function category(ProductFilter $filter, Request $request, $slug, $id ){
+
+        $request['category'] = array($id);
+
         $expiresAt = now()->addMinutes(10);
 
         if( Cache::has('category_'. $id ) ){

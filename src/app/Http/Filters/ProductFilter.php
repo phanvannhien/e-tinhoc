@@ -20,6 +20,7 @@ class ProductFilter extends QueryFilters
     }
 
     public function category( $s ) {
+    
         return $this->builder->whereHas('categories', function($query) use ($s){
             return $query->whereIn('category_id', $s );
         });

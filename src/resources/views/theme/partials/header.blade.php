@@ -10,14 +10,14 @@
     <div id="header-main" class="">
         <div class="container">
             <div class="row align-items-center no-gutters">
-                <div class="col-2 col-lg-2">
+                <div class="col-2 col-lg-3">
                     <div id="logo">
                         <a title="{{ config('app.name') }}" href="{{ url('/') }}">
                             <img src="{{ app('Configuration')->get('logo') }}" alt="{{ config('app.name') }}" />
                         </a>
                     </div>
                 </div>
-                <div class="col-2 d-none d-md-flex col-lg-6">
+                <div class="col-2 d-none d-md-flex col-lg-3">
                     <div id="search-form">
                         <form action="" method="">
                             @csrf
@@ -32,7 +32,11 @@
                     </div><!-- end search-form -->
                 </div>
 
-                <div class="col-10 col-lg-4">
+                <div class="col-2 d-none d-lg-flex col-lg-3 justify-content-end">
+                    <p class="mb-0 text-right">Hotline: <a class="hot-line" href="tel:{{ app('Configuration')->get('hot_line') }}">{{ app('Configuration')->get('hot_line') }}</a> </p>
+                </div>
+
+                <div class="col-10 col-lg-3">
                     <div id="header-right">
                         <div id="user-nav" class="mr-md-3">
                             @if( Auth::check() )

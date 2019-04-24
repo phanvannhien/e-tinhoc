@@ -47,9 +47,6 @@
                                 <a href="#" class="btn btn-default btn-flat">{{ trans('admin.profile') }}</a>
                             </div>
                             <div class="pull-right">
-
-
-
                                 <form action="{{ route('admin.logout') }}" method="post">
                                     {{ csrf_field() }}
                                     <a class="dropdown-item btn btn-sm btn-primary" onclick="$(this).parent().submit()" href="javascript:;">Đăng xuất</a>

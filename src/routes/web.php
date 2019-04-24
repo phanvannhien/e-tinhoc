@@ -126,7 +126,7 @@ Route::group([
 
         Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
         Route::get('/api/report','Admin\AdminController@report')->name('admin.report');
-        Route::get('logout', 'Admin\LoginController@logout')->name('admin.logout');
+        Route::post('logout', 'Admin\Auth\LoginController@logout')->name('admin.logout');
 
 
 
