@@ -8,7 +8,7 @@
 @section('content')
     @if( $selected_menu )
         @php
-            $menuItems = $selected_menu->menu_items()->withDepth()->get()->toTree();
+            $menuItems = $selected_menu->menu_items()->orderBy('_lft')->withDepth()->get()->toTree();
         @endphp
     @endif
     <!-- Content Header (Page header) -->

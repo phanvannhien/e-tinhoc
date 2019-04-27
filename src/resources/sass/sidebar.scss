@@ -5,7 +5,7 @@
     padding: 0;
     background: #FFF;
     .has-children > a{
-      background: #e5e5e5;
+   
     }
     li{
       &:last-child{
@@ -19,7 +19,6 @@
         display: block;
         font-weight: 400;
         font-size: 0.9rem;
-        border-bottom: 1px solid #e5e5e5;
 
       }
     }

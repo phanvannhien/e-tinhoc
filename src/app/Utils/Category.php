@@ -97,7 +97,7 @@ class Category{
 
     }
 
-    public static function renderMenuTree($cats, $class = 'dd-list '){
+    public static function renderMenuTree($cats, $class = 'dd-list'){
         $html = "<ol class=\"".$class."\" >";
 
         foreach($cats as $cat) {
@@ -116,9 +116,11 @@ class Category{
                 <span class="text-sm text-black-50">Classes: '.$cat->classes.'</span> <span class="text-sm text-black-50">Type:'.$cat->type.'</span>
                 </div>';
             if(  $cat->children ) {
-                $html .= self::renderMenuTree($cat->children);
+
+                $html .= self::renderMenuTree($cat->children, $class = 'dd-list' );
             }
             $html .= "</li>";
+
         }
         $html .= "</ol>";
         return $html;

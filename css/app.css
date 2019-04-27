@@ -16566,10 +16566,6 @@ button.toast-close-button {
   background: #FFF;
 }
 
-.tree-category ul .has-children > a {
-  background: #e5e5e5;
-}
-
 .tree-category ul li:last-child a {
   border-bottom: 0;
 }
@@ -16579,7 +16575,6 @@ button.toast-close-button {
   display: block;
   font-weight: 400;
   font-size: 0.9rem;
-  border-bottom: 1px solid #e5e5e5;
 }
 
 .tree-category ul .sub-cat li a:before {

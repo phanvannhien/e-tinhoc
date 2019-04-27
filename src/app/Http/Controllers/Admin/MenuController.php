@@ -93,7 +93,7 @@ class MenuController extends Controller
         if( $request->has('cats') ){
             $cats = $request->input('cats');
             $tree = MenuItems::rebuildTree( $cats );
-
+            MenuItems::fixTree();
             return response()->json([
                 'success' => true
             ]);

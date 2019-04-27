@@ -120,11 +120,12 @@
     }(document, 'script', 'facebook-jssdk'));</script>
     @php
         $primaryNav =  Cache::remember('menu-primary', 60, function () {
-            return \App\Models\MenuItems::where('menu_id', 1 )->where('menu_status', 1)->get()->toTree();
+            return \App\Models\MenuItems::where('menu_id', 1 )->where('menu_status', 1)->orderBy('_lft')->get()->toTree();
         });
 
+
         $topNav =  Cache::remember('menu-top', 60, function () {
-           return \App\Models\MenuItems::where('menu_id', 11 )->where('menu_status', 1)->get()->toTree();
+           return \App\Models\MenuItems::where('menu_id', 11 )->where('menu_status', 1)->orderBy('_lft')->get()->toTree();
         });
 
     @endphp

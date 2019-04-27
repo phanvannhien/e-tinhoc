@@ -17,7 +17,7 @@ class CategoryController extends Controller
 {
 
     public function index(){
-        $data = Category::withDepth()->get()->toTree();
+        $data = Category::withDepth()->orderBy('_lft')->get()->toTree();
         return view('admin.categories.index', compact('data'));
     }
 
@@ -62,7 +62,7 @@ class CategoryController extends Controller
 
     public function edit( Request $request, $id ){
         $category = Category::findOrFail( $id );
-        $data = Category::withDepth()->get()->toTree();
+        $data = Category::withDepth()->orderBy('_lft')->get()->toTree();
         return view('admin.categories.edit', compact('category','data'));
 
     }
@@ -130,7 +130,8 @@ class CategoryController extends Controller
     public function ordering(Request $request){
         if( $request->has('cats') ){
             $cats = $request->input('cats');
-            $tree = Category::rebuildTree( $cats );
+            Category::rebuildTree( $cats );
+            Category::fixTree();
 
             return response()->json([
                 'success' => true

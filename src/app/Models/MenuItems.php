@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
+use Spatie\EloquentSortable\SortableTrait;
 
 class MenuItems extends Model
 {
@@ -11,6 +12,7 @@ class MenuItems extends Model
 
     protected $fillable = [
         'id',
+        'menu_order',
 
     ];
 

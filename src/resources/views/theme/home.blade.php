@@ -49,12 +49,16 @@
                     return  \App\Category::where('id',$cat_id )->first();
                 });
 
-                $products = Cache::remember( 'product-carousel-'.$cat_id  , 300 , function () use ($cat) {
-                    return $cat->products()->orderBy('created_at','DESC')->limit(10)->get();
-                });
+                if($cat){
+                    $products = Cache::remember( 'product-carousel-'.$cat_id  , 300 , function () use ($cat) {
+                        return $cat->products()->orderBy('created_at','DESC')->limit(10)->get();
+                    });
+                }
+
+
 
             @endphp
-            @if( $cat && $products->count() )
+            @if( $cat && $products )
             <section class="mb-4">
                 <div class="container">
                     <h3 class=""><a href="{{ $cat->getUrl() }}" title="{{ $cat->category_name }}">{{ $cat->category_name }}</a></h3>

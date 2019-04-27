@@ -7,14 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
 
 use App\CategoryProductTrans;
+use Spatie\EloquentSortable\SortableTrait;
 
 
 class Category extends Model
 {
     use NodeTrait;
-
+    use SortableTrait;
 
     protected $table = 'categories';
+
+    public $sortable = [
+        'order_column_name' => 'orderable',
+        'sort_when_creating' => true,
+    ];
 
     public $fillable = [
         'slug',

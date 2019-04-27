@@ -105,7 +105,7 @@ class HomeController extends Controller
         if( Cache::has('categories') ){
             $categories = Cache::get('categories');
         }else{
-            $categories = Category::whereNull('parent_id')->where('status',1)->get();
+            $categories = Category::whereNull('parent_id')->where('status',1)->orderBy('_lft')->get();
             Cache::put('categories', $categories, $expiresAt);
         }
 
