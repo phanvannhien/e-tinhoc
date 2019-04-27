@@ -88,4 +88,21 @@ class MenuController extends Controller
     }
 
 
+
+    public function ordering(Request $request){
+        if( $request->has('cats') ){
+            $cats = $request->input('cats');
+            $tree = MenuItems::rebuildTree( $cats );
+
+            return response()->json([
+                'success' => true
+            ]);
+        }
+        return response()->json([
+            'success' => false
+        ]);
+
+    }
+
+
 }

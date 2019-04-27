@@ -9,6 +9,11 @@ class MenuItems extends Model
 {
     use NodeTrait;
 
+    protected $fillable = [
+        'id',
+
+    ];
+
     protected $table = 'menu_items';
 
 

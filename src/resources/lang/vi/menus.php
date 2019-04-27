@@ -1,5 +1,6 @@
 <?php
 return [
+    'menu_icon' => 'Menu icon',
     'menu' => 'Menu',
     'select_menu' => 'Chọn Menu',
     'create_menu' => 'Tạo Menu',

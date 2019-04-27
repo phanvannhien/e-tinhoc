@@ -162,6 +162,8 @@ Route::group([
             'prefix' => 'product',
         ], function(){
             Route::resource('categories','Admin\CategoryController');
+
+            Route::post('categories-ordering','Admin\CategoryController@ordering')->name('ajax.category.ordering');
             Route::resource('product','Admin\ProductController');
             Route::post('product/remove','Admin\ProductController@remove')->name('product.remove');
 
@@ -201,7 +203,7 @@ Route::group([
 
             Route::resource('menu','Admin\MenuController');
             Route::resource('menu_item','Admin\MenuItemController');
-
+            Route::post('menu-ordering','Admin\MenuController@ordering')->name('ajax.menu.ordering');
 
         });
         // System

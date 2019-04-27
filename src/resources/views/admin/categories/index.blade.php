@@ -86,13 +86,17 @@
             <div class="col-sm-6">
                 <div class="box">
                     <div class="box-body">
+                        <div class="alert alert-warning">
+                            <p>Kéo thả để sắp xếp, Chú ý lưu lại sau khi sắp xếp.</p>
+                        </div>
+                        <button id="save-menu-order" class="btn btn-info"><i class="fa fa-save"></i> Lưu sắp xếp </button>
+                        <div id="nestable" class="dd">
                         {!! \App\Utils\Category::renderAdminHtml( $data, 'categories.edit','categories.destroy','category.product','admin-product-category' ) !!}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
 
 
 
@@ -101,37 +105,6 @@
 
 @stop
 @section('footer')
-    <script>
-        $(document).ready(function () {
-           $('body').on('click','.admin-product-category .btn-delete', function (e) {
-                e.preventDefault();
-                var that = this;
-               swal({
-                   title: 'Bạn chắc chắn muốn xoá?',
-                   text: "Bạn không thể phục hồi",
-                   type: 'warning',
-                   showCancelButton: true,
-                   confirmButtonColor: '#3085d6',
-                   cancelButtonColor: '#d33',
-                   confirmButtonText: 'Tiếp tục xoá!'
-               }, function(){
-                   $.ajax({
-                       dataType: 'json',
-                       url: $(that).attr('href'),
-                       method: 'DELETE',
-                       success: function(response){
-                           if( response.success ){
-                               window.location.href = '{{ route('categories.index') }}' ;
-                           }else{
-                               swal("Thông báo!", response.msg , "error");
-                           }
-                       }
-                   });
-               });
+    @include('admin.categories.script')
 
-
-
-           });
-        });
-    </script>
 @stop

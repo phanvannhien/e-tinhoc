@@ -67,6 +67,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h4>@lang('app.create') @lang('menus.create_menu_item') </h4>
+
                         <form action="{{ route('menu_item.store') }}" method="post">
                             <input type="hidden" name="menu_id" value="{{ $selected_menu->id }}">
                             @csrf
@@ -119,9 +120,15 @@
                     </div>
                     <div class="col-md-6">
                         <h4>{{  $selected_menu ? $selected_menu->menu_title : ''  }}</h4>
+                        <div class="alert alert-warning">
+                            <p>Kéo thả để sắp xếp Menu, Chú ý lưu lại sau khi sắp xếp.</p>
+                        </div>
+                        <button id="save-menu-order" class="btn btn-info"><i class="fa fa-save"></i> Lưu sắp xếp </button>
+                        <div class='dd' id="nestable">
                         @if( $selected_menu )
                             {!! App\Utils\Category::renderMenuTree($menuItems) !!}
                         @endif
+                        </div>
                     </div>
                 </div>
                 @endif
@@ -135,6 +142,7 @@
 @stop
 
 @section('footer')
+    <script src="{{ url('admin/dist/js/nestable/jquery.nestable.js') }}"></script>
     <script>
 
         $('#btn-remove-menu').on('click', function (e) {
@@ -233,7 +241,41 @@
             $('.icp-auto').iconpicker();
 
 
+
+            $('#nestable').nestable({
+                group: 1,
+                maxDepth: 5,
+                dragClass: 'drag-able'
+            });
+
         });
+
+        $('#save-menu-order').on('click', function (e) {
+            e.preventDefault();
+            var data = $('#nestable').nestable('serialize');
+            console.log(data);
+            $.ajax({
+                url: '{{ route("ajax.menu.ordering") }}',
+                dataType: 'json',
+                type: 'post',
+                data: { cats : data },
+                beforeSend: function(){
+
+                },
+                success: function( res ){
+                    if( res.success ){
+                        swal({
+                            title: "@lang('app.success')",
+                            text: "@lang('app.success')",
+                            type: "success"
+                        });
+                    }
+
+                }
+
+            });
+        });
+
 
 
     </script>

@@ -107,8 +107,8 @@ class CategoryController extends Controller
         try{
             DB::beginTransaction();
             $category = Category::findOrFail( $id );
-            $category->products()->delete();
             $category->delete();
+            DB::table('category_product')->where('category_id',$id )->delete();
 
             DB::commit();
             return response()->json([
@@ -127,5 +127,19 @@ class CategoryController extends Controller
 
     }
 
+    public function ordering(Request $request){
+        if( $request->has('cats') ){
+            $cats = $request->input('cats');
+            $tree = Category::rebuildTree( $cats );
+
+            return response()->json([
+                'success' => true
+            ]);
+        }
+        return response()->json([
+            'success' => false
+        ]);
+
+    }
 
 }

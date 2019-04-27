@@ -6,24 +6,24 @@ class Category{
 
 
     public static function renderAdminHtml( $cats, $edit = 'categories.edit', $delete = 'categories.destroy',$view = 'category.product', $class = 'dd-list-cat'){
-        $html = "<ul class=\"dd-list-cat ".$class."\" >";
+        $html = "<ol class=\"dd-list ".$class."\" >";
 
         foreach($cats as $cat) {
             $view_href = route($view, ['slug' =>$cat->slug, 'id' => $cat->id ]);
             $edit_href = route( $edit,$cat->id);
             $delete_href = route($delete,$cat->id);
             $html.= '<li class="dd-item" data-id="'.$cat->id.'" >
-                <div class="dd3-content clearfix">
+                  <span class="dd-handle"><i class="fas fa-arrows-alt"></i></span>
+                <div class="dd-content">
                     <img width="30" src="'.$cat->getImage().'" alt="">
                     <div class="content-left">
                         <p class="pull-right">
-                       
                             <a class="btn btn-sm btn-primary btn-edit" id="'.$cat->id.'" href="'.$edit_href.'" ><i class="fa fa-edit"></i></a>
                             <a class="btn btn-sm btn-danger btn-delete" id="'.$cat->id.'" href="'.$delete_href.'"><i class="fa fa-trash"></i></a>
                         </p>
                         <p id="label_show'.$cat->id.'">'.$cat->category_name.'</p>
                         <a target="_blank" href="'.$view_href.'">'.$view_href.'</a>
-                        
+                       
                     </div>
                 </div>';
 
@@ -32,7 +32,7 @@ class Category{
             }
             $html .= "</li>";
         }
-        $html .= "</ul>";
+        $html .= "</ol>";
         return $html;
     }
 
@@ -97,8 +97,8 @@ class Category{
 
     }
 
-    public static function renderMenuTree($cats, $class = 'ui-sortable todo-list '){
-        $html = "<ul class=\"".$class."\" >";
+    public static function renderMenuTree($cats, $class = 'dd-list '){
+        $html = "<ol class=\"".$class."\" >";
 
         foreach($cats as $cat) {
             $spe = '';
@@ -106,18 +106,21 @@ class Category{
                 $spe .= '&nbsp;&nbsp;&nbsp;&nbsp;';
             }
             $html.= '<li class="dd-item" data-id="'.$cat->id.'" >
+                <span class="dd-handle"><i class="fas fa-arrows-alt"></i></span>
+                <div class="dd-content">
+                
                 <a class="destroy-menu btn btn-sm btn-danger pull-right" id="'.$cat->id.'" href="'.route('menu_item.destroy', $cat->id ).'"><i class="fa fa-trash"></i></a>
                 <a class="edit-menu btn btn-sm btn-primary pull-right" id="'.$cat->id.'" href="'.route('menu_item.edit', $cat->id ).'" ><i class="fa fa-edit"></i></a>
                 <i class="'.$cat->menu_icon.'"></i>'.$cat->menu_title.$cat->getStatus().  ' <br/>
                 <span class="text-sm text-black-50">Link: <a target="_blank" href="'.$cat->menu_link.'">'.$cat->menu_link.'</a></span><br/>
                 <span class="text-sm text-black-50">Classes: '.$cat->classes.'</span> <span class="text-sm text-black-50">Type:'.$cat->type.'</span>
-                </li>';
+                </div>';
             if(  $cat->children ) {
                 $html .= self::renderMenuTree($cat->children);
             }
             $html .= "</li>";
         }
-        $html .= "</ul>";
+        $html .= "</ol>";
         return $html;
     }
 

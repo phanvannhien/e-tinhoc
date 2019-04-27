@@ -91,7 +91,13 @@
             <div class="col-sm-6">
                 <div class="box">
                     <div class="box-body">
+                        <div class="alert alert-warning">
+                            <p>Kéo thả để sắp xếp, Chú ý lưu lại sau khi sắp xếp.</p>
+                        </div>
+                        <button id="save-menu-order" class="btn btn-info"><i class="fa fa-save"></i> Lưu sắp xếp </button>
+                        <div id="nestable" class="dd">
                         {!! \App\Utils\Category::renderAdminHtml( $data, 'categories.edit','categories.destroy' ) !!}
+                        </div>
                     </div>
                 </div>
             </div>
