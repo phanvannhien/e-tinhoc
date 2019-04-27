@@ -17004,7 +17004,12 @@ footer #footer-top .footer-menu li a {
 }
 
 footer #footer-main {
-  background: #fbfbfb;
+  background: #373435;
+  color: #FFF;
+}
+
+footer #footer-main a {
+  color: #FFF;
 }
 
 footer #footer-main .footer-block h2,
@@ -17014,8 +17019,8 @@ footer #footer-main .footer-block h3 {
 }
 
 footer #footer-bottom {
-  background: #ececec;
-  border-top: 1px solid #dedede;
+  background: #212020;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 footer #footer-bottom p {
@@ -17247,6 +17252,11 @@ input:-webkit-autofill:active {
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+.hot-line {
+  font-size: 1.2rem;
+  color: red;
 }
 
 /**

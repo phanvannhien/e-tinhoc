@@ -33,7 +33,8 @@
                 </div>
 
                 <div class="col-2 d-none d-lg-flex col-lg-3 justify-content-end">
-                    <p class="mb-0 text-right">Hotline: <a class="hot-line" href="tel:{{ app('Configuration')->get('hot_line') }}">{{ app('Configuration')->get('hot_line') }}</a> </p>
+                    <p class="mb-0 text-right">Hotline: <a class="hot-line" href="tel:{{ app('Configuration')->get('hot_line') }}">
+                          <i class="fa fa-phone"></i>  {{ app('Configuration')->get('hot_line') }}</a> </p>
                 </div>
 
                 <div class="col-10 col-lg-3">

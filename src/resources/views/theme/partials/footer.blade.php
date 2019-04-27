@@ -45,7 +45,7 @@
 
     </div>
 
-    <div id="footer-bottom" class="py-5">
+    <div id="footer-bottom" class="py-3">
         <div class="container">
             @if( $block_footer_contact )
             {!! $block_footer_contact->block_content !!}
