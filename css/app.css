@@ -16713,6 +16713,12 @@ header.sticky #logo img {
   background: #FFF;
 }
 
+@media (min-width: 992px) {
+  #header-main #header-main-inner {
+    min-height: 5rem;
+  }
+}
+
 /**
 MAIN NAV
  */
@@ -16879,6 +16885,10 @@ MAIN NAV
     left: 100%;
     top: 0;
   }
+}
+
+#search-form {
+  width: 100%;
 }
 
 #header-right {

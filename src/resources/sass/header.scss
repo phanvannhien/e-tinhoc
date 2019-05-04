@@ -112,6 +112,12 @@ header{
 
 #header-main{
   background: #FFF;
+  @include media-breakpoint-up(lg){
+    #header-main-inner{
+      min-height: 5rem;
+    }
+  }
+  
 }
 
 /**
@@ -280,7 +286,7 @@ MAIN NAV
 }
 
 #search-form{
-
+  width: 100%;
 }
 
 #header-right{
