@@ -16658,7 +16658,7 @@ header {
 }
 
 header #logo img {
-  max-height: 3rem;
+  max-height: 5rem;
   margin: 1rem 0;
 }
 
@@ -16715,7 +16715,7 @@ header.sticky #logo img {
 
 @media (min-width: 992px) {
   #header-main #header-main-inner {
-    min-height: 5rem;
+    min-height: 6rem;
   }
 }
 
