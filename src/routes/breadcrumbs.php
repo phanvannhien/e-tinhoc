@@ -50,8 +50,10 @@ Breadcrumbs::for('product.category', function ($trail, $category) {
 // Home > Product Category > Product
 
 Breadcrumbs::for('product', function ($trail, $product) {
-    if($product->categories){
+    if( $product->categories &&  $product->categories->count() > 0 ){
         $trail->parent('product.category', $product->categories[0]);
+    }else{
+        $trail->parent('home');
     }
 
     $trail->push( Str::words($product->title, 12), route('product.detail', ['slug' => $product->slug, 'id' => $product->id ] ));

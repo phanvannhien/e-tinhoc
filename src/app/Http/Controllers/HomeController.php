@@ -160,14 +160,27 @@ class HomeController extends Controller
         if( Cache::has('product_detail_'.$id.'_related' ) ){
             $related = Cache::get('product_detail_'.$id.'_related' );
         }else{
+            $currentCategory = $product->categories()->pluck('category_id')->toArray();
+           
+            if( count($currentCategory) <= 0 ){
+        
+                $related = Product::where('id', '!=', $product->id  )
+                    ->orderBy('title','ASC')
+                    ->limit(12)->get();
 
-            $related = Product::whereHas('categories',function ($query) use ($product){
-                $query->where('category_id', $product->categories()->pluck('category_id')->toArray() );
-            })->where('id', '!=', $product->id  )
-                ->orderBy('title','ASC')->paginate();
+
+            }else{
+                $related = Product::whereHas('categories',function ($query) use ($currentCategory){
+                    $query->whereIn('category_id', $currentCategory );
+                })->where('id', '!=', $product->id  )
+                    ->orderBy('title','ASC')
+                    ->limit(12)->get();
+            }
+
 
             Cache::put('product_detail_'.$id.'_related' , $related, $expiresAt);
         }
+
 
 
         SEOMeta::setTitle($product->title);
@@ -192,12 +205,6 @@ class HomeController extends Controller
             ->setArticle([
                 'published_time' => $product->created_at,
                 'modified_time' => $product->updated_at,
-                'author' => [
-                    'first_name' => 'Nhien',
-                    'last_name' => 'Nhien',
-                    'username' => 'jusephan',
-                    'gender' => 'male',
-                ],
                 'section' => 'Website',
                 'tag' => $product->meta_title
             ]);

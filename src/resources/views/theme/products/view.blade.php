@@ -1,4 +1,4 @@
-<div class="product-item shadow-sm">
+<div class="product-item shadow-sm p-2">
     @if( $product->getDiscount() != 0 )
     <div class="tag-sales">
         {!! $product->getDiscount() !!}
@@ -6,7 +6,7 @@
     @endif
 
     <a title="{{ $product->title }}" href="{{ route('product.detail', [ 'slug' => $product->slug, 'id' => $product->id ] ) }}">
-        <figure>
+        <figure class="p-2">
             <img title="{{ $product->name }}" class="img-fluid product-thumbnail" src="{{ $product->thumbnail }}" alt="{{ $product->title }}" />
         </figure>
     </a>

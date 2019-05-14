@@ -51,7 +51,9 @@
                                                 <i class="fa fa-edit"></i> {{ trans('app.edit') }}</a> |
 
                                         <a href="{{ route('product.edit', [ 'id' => $item->id, 'mode' => 'clone' ]) }}" class="">
-                                            <i class="fa fa-copy"></i> {{ trans('app.duplicate') }}</a>
+                                            <i class="fa fa-copy"></i> {{ trans('app.duplicate') }}</a> | 
+
+                                        <a target="_blank" href="{{ $item->getUrl() }}">Xem</a>
 
                                     </td>
 

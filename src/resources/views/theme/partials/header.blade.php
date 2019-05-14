@@ -19,16 +19,17 @@
                 </div>
                 <div class="col-2 d-none d-md-flex col-lg-5">
                     <div id="search-form">
-                        <form action="" method="">
+                        <form id="frm-search" action="" method="">
                             @csrf
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="@lang('app.search')"
                                        aria-label="" aria-describedby="">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary text-white" type="button" id="button-addon2">@lang('app.search')</button>
+                                    <button class="btn btn-primary text-white" type="button" id="button-search">@lang('app.search')</button>
                                 </div>
                             </div>
                         </form>
+                        <div id="search-results"></div>
                     </div><!-- end search-form -->
                 </div>
 

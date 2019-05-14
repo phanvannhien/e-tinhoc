@@ -123,7 +123,8 @@
                         {!! $product->description  !!}
                     </div>
                     <p class="text-center mt-4">
-                        <a id="more-description" href="#" class="btn btn-outline-secondary">@lang('app.read_more') <i class="fal fa-angle-down"></i></a>
+                        <a id="more-description" href="#" class="btn btn-outline-secondary">@lang('app.read_more') 
+                            <i class="la la-angle-down"></i></a>
                     </p>
                 </div>
                 <div class="col-md-4 border-left">

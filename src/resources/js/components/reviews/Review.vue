@@ -11,7 +11,7 @@
               </div>
         </div>
         <p class="text-center mt-3">
-            <span v-if="page < last_page" @click="loadMore" class="btn btn-outline-warning">
+            <span v-show="page < last_page" @click="loadMore" class="btn btn-outline-warning">
                 <i class="la la-angle-down"></i> Xem thêm
             </span>
         </p>
@@ -23,7 +23,6 @@
     export default {
 
         props: {
-
             product:{
                 required: true,
                 type: Number,
@@ -31,8 +30,8 @@
         },
         data: function() {
             return {
-                page: 0,
-                last_page: 0,
+                page: 1,
+                last_page: 1,
                 reviews: []
             }
         },
@@ -51,7 +50,7 @@
                 })
                 .then(({data}) => {
                     t.reviews.push(...data.data) ;
-                    t.page = data.from;
+                    t.page = data.current_page;
                     t.last_page = data.last_page;
                     console.log(t.reviews);
                 })

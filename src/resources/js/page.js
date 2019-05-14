@@ -452,5 +452,51 @@ jQuery(document).ready(function(){
     });
 
 
+    $(document).click(function(){
+        $('#search-results').hide();
+    });
+
+    $('#frm-search input[type="text"]').click(function(){
+        $('#search-results').show();
+    });
+    $('#frm-search input[type="text"]').focus(function(){
+        $('#search-results').show();
+    });
+
+    $('#search-results, #frm-search').click(function(e){
+        e.stopPropagation();
+    });
+
+    $('#button-search').on('click', function(e){
+        e.preventDefault();
+        $('#frm-search input[type="text"]').trigger('keyup');
+    });
+
+    $('#frm-search input[type="text"]').keyup(function (e) {
+        e.preventDefault();
+        console.log($(this).val());
+        if( $(this).val().length > 3 ){
+            $.ajax({
+                url: 'ajax/search',
+                type: 'get',
+                data: {
+                    s: $(this).val()
+                },
+                beforeSend: function () {
+
+                },
+                success: function ( response ) {
+                    $('#search-results').html( response );
+                    $('#search-results').show();
+                },
+
+            });
+        }else{
+
+        }
+    });
+
+
+
 });
 

@@ -28,7 +28,7 @@ Route::get('/{slug}-p{id}.html', 'HomeController@detail')->where([
 ])->name('product.detail');
 
 
-
+Route::get('/ajax/search','AjaxController@search')->name('search');
 
 Route::get('/contact-us.html','HomeController@contact')->name('company.contact');
 Route::post('/contact-us.html','HomeController@contactSave')->name('company.contact.post');

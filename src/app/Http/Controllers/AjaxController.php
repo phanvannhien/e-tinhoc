@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\District;
 use App\Models\Wards;
 use Illuminate\Http\Request;
-
+use App\Product;
 
 // Models
 use App\User;
@@ -68,5 +68,17 @@ class AjaxController extends Controller
             }
         }
     }
+
+
+    public function search(Request $request){
+        if($request->ajax() && $request->has('s') && strlen($request->input('s')) > 3 ){
+            $s = $request->input('s');
+            $products = Product::where( 'title','LIKE', '%'.$s.'%' )
+                ->select('products.id','title','slug')
+                ->limit(10)->get();
+            return view('ajax.product_search', compact('products'));
+        }
+    }
+
 
 }
