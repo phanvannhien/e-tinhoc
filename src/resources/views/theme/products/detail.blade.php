@@ -28,47 +28,43 @@
                         </div>
     
                         <div class="product-addcart">
-                            <form id="form-addcart" action="{{ route('product.addcart') }}" method="post">
-                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-
-                                <div class="product-quantity mb-3" style="max-width: 150px">
-                                    <div class="input-group text-center">
-                                    <span class="input-group-prepend" id="qty-down">
-                                        <button class="btn" type="button" id="">-</button>
-                                    </span>
-                                        <input name="qty" type="text" value="1" max="100" min="1" class="form-control text-center qty" />
-                                        <span class="input-group-append" id="qty-up">
-                                        <button class="btn" type="button" id="">+</button>
-                                    </span>
-                                    </div>
-                                </div>
-
-
-                                <div class="clearfix mb-3">
-                                    <div class="row">
-                                        <div class="col-sm-6">
+                            <div class="clearfix mb-3">
+                                <div class="row align-items-end">
+                                    <div class="col-sm-6">
+                                        <form id="form-addcart" action="{{ route('product.addcart') }}" method="post">
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <div class="product-quantity mb-3" style="max-width: 150px">
+                                                <div class="input-group text-center">
+                                                <span class="input-group-prepend" id="qty-down">
+                                                    <button class="btn" type="button" id="">-</button>
+                                                </span>
+                                                    <input name="qty" type="text" value="1" max="100" min="1" class="form-control text-center qty" />
+                                                    <span class="input-group-append" id="qty-up">
+                                                    <button class="btn" type="button" id="">+</button>
+                                                </span>
+                                                </div>
+                                            </div>
                                             <a data-pid="{{ $product->id }}" rel="nofollow" target="_blank" href="#"
-                                               class="btn-add-cart btn btn-block btn-lg btn-radius btn-outline-danger mb-3 mb-sm-0" >
+                                                class="btn-add-cart btn btn-block btn-lg btn-radius btn-outline-danger mb-3 mb-sm-0" >
                                                 <i class="fa fa-cart-plus"></i>
                                                 @lang('product.add_cart')
                                             </a>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <form action="{{ route('purchase') }}" method="post">
-                                                {{ csrf_field()  }}
-                                                <input type="hidden" name="pid" value="{{ $product->id }}">
-                                                <button type="submit" class="btn btn-block btn-warning btn-lg btn-radius">
-                                                    <i class="fa fa-shopping-cart"></i>
-                                                    @lang('product.buy_now')
-                                                </button>
-                                            </form>
-                                        </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <form action="{{ route('purchase') }}" method="post">
+                                            {{ csrf_field()  }}
+                                            <input type="hidden" name="pid" value="{{ $product->id }}">
+                                            <button type="submit" class="btn btn-block btn-warning btn-lg btn-radius">
+                                                <i class="fa fa-shopping-cart"></i>
+                                                @lang('product.buy_now')
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
-                            </form>
-                            <p>
+                            </div>
 
-                           
+                            <p>
                             @if( auth()->check() )
                                 @if( ! Auth::user()->loved( $product->id ) )
                                 <a href="#" class="save-to-favorite" data-id="{{ $product->id }}">

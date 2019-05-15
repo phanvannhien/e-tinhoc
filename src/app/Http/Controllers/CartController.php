@@ -126,42 +126,38 @@ class CartController extends Controller{
     public function purchaseNow(Request $request){
         $product = Product::findOrFail($request->input('pid'));
         if( !$product ){
-            return back()->withErrors('Product not found!');
+            return back()->withErrors('Không tìm thấy sản phẩm!');
         }
 
+        $qty = $request->input('qty') ? : 1 ;
+          
         $cartItem = Cart::get($product->id);
         if( $cartItem ){
-            $cartItem = $cartItem->toArray();
-            if( $product->quantity < ( $cartItem['quantity'] ) ){
-                return back()->withErrors('Product is out of stock!');
-            }
-        }else{
+            Cart::update( $product->id , array(
+                'quantity' => array(
+                    'relative' => true,
+                    'value' => $qty
+                ),
 
-
-            if( $product->quantity < 1 ){
-                return back()->withErrors('Product is out of stock!');
-            }
-
-
-            $price = ( $product->sale_price != 0 ) ? $product->sale_price :  $product->base_price;
-
+            ));
+        }else{ // add new cart item
+            $price = ( $product->sale_price != 0 ) ? $product->sale_price :  $product->price;
             $arr = array(
                 'id' => $product->id,
                 'name' => $product->title ,
                 'price' =>  $price,
-                'quantity' => 1,
+                'quantity' => (int)$qty,
                 'attributes' => array(
+                    'product_id' => $product->id,
                     'slug' => $product->slug,
-                    'image' => $product->getThumbnail()
+                    'image' => $product->thumbnail
                 )
             );
-
 
             Cart::add($arr);
         }
 
-
-        return redirect()->route('checkout');
+        return redirect()->route('cart.checkout');
     }
 
     public function checkoutSave( Request $request ){

@@ -74,7 +74,7 @@ class HomeController extends Controller
         OpenGraph::setTitle( $configuration->get('site_title') );
         OpenGraph::setDescription( $configuration->get('site_description') );
         OpenGraph::setUrl( $request->getUri());
-        OpenGraph::addProperty('image:url', url('img/thiet-ke-website-nen-chon.jpg') );
+        OpenGraph::addProperty('image:url',  $configuration->get('logo') );
         OpenGraph::addProperty('image:alt', $configuration->get('site_title') );
 
         OpenGraph::addProperty('type', 'website');
@@ -83,7 +83,7 @@ class HomeController extends Controller
         OpenGraph::addProperty('site_name', app('Configuration')->get('company_name') );
 
         Twitter::setTitle( $configuration->get('site_title') );
-        Twitter::setImage( url('img/thiet-ke-website-nen-chon.jpg')  );
+        Twitter::setImage( $configuration->get('logo')  );
 
         return view('theme.home', compact('posts','blogcat'));
     }
@@ -405,7 +405,7 @@ class HomeController extends Controller
         }
 
         OpenGraph::setUrl( $request->getUri());
-        OpenGraph::addProperty('image:url', url('img/thiet-ke-website-nen-chon.jpg') );
+        OpenGraph::addProperty('image:url',  $configuration->get('logo') );
         OpenGraph::addProperty('image:alt', app('Configuration')->get('site_title') );
 
         OpenGraph::addProperty('type', 'website');
@@ -414,7 +414,7 @@ class HomeController extends Controller
         OpenGraph::addProperty('site_name', app('Configuration')->get('company_name') );
 
         Twitter::setTitle( app('Configuration')->get('site_title') );
-        Twitter::setImage( url('img/thiet-ke-website-nen-chon.jpg')  );
+        Twitter::setImage(  $configuration->get('logo') );
 
 
         return view('theme.pages.templates', compact('templates', 'categories'));
@@ -430,7 +430,7 @@ class HomeController extends Controller
         }
 
         OpenGraph::setUrl( $request->getUri());
-        OpenGraph::addProperty('image:url', url('img/thiet-ke-website-nen-chon.jpg') );
+        OpenGraph::addProperty('image:url',  $configuration->get('logo') );
         OpenGraph::addProperty('image:alt', app('Configuration')->get('site_title') );
 
         OpenGraph::addProperty('type', 'website');
@@ -439,7 +439,7 @@ class HomeController extends Controller
         OpenGraph::addProperty('site_name', app('Configuration')->get('company_name') );
 
         Twitter::setTitle( app('Configuration')->get('site_title') );
-        Twitter::setImage( url('img/thiet-ke-website-nen-chon.jpg')  );
+        Twitter::setImage(  $configuration->get('logo')  );
 
 
         return view('theme.pages.clients', compact('clients'));
@@ -454,7 +454,7 @@ class HomeController extends Controller
         }
 
         OpenGraph::setUrl( $request->getUri());
-        OpenGraph::addProperty('image:url', url('img/thiet-ke-website-nen-chon.jpg') );
+        OpenGraph::addProperty('image:url',  $configuration->get('logo') );
         OpenGraph::addProperty('image:alt', app('Configuration')->get('site_title') );
 
         OpenGraph::addProperty('type', 'website');
@@ -463,7 +463,7 @@ class HomeController extends Controller
         OpenGraph::addProperty('site_name', app('Configuration')->get('company_name') );
 
         Twitter::setTitle( app('Configuration')->get('site_title') );
-        Twitter::setImage( url('img/thiet-ke-website-nen-chon.jpg')  );
+        Twitter::setImage(  $configuration->get('logo') );
 
 
         return view('theme.pages.contact', compact('stores'));
@@ -495,12 +495,9 @@ class HomeController extends Controller
 
         $contact->save();
 
-        return back()->with('status','Thanks for your contact');
-
-
+        return back()->with('status','Cám ơn bạn đã liên hệ');
 
     }
-
 
 
 }
