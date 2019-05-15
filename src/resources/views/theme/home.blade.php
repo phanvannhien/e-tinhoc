@@ -54,9 +54,6 @@
                         return $cat->products()->orderBy('created_at','DESC')->limit(10)->get();
                     });
                 }
-
-
-
             @endphp
             @if( $cat && $products )
             <section class="mb-4">

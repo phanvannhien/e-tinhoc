@@ -108,7 +108,7 @@
                     @endforeach
                 </div>
 
-                <div class="pagination">
+                <div class="pagination justify-content-center">
                     {!! $products->appends(request()->input())->links() !!}
                 </div>
 
