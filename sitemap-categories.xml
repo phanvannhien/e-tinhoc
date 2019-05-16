@@ -27,37 +27,12 @@
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-	<loc>http://tinhoc.local/may-bo-lcd-c12.html</loc>
-		<priority>0.5</priority>
-		<changefreq>weekly</changefreq>
-	</url>
-	<url>
-	<loc>http://tinhoc.local/man-hinh-c13.html</loc>
-		<priority>0.5</priority>
-		<changefreq>weekly</changefreq>
-	</url>
-	<url>
-	<loc>http://tinhoc.local/do-hoa-workstation-c14.html</loc>
-		<priority>0.5</priority>
-		<changefreq>weekly</changefreq>
-	</url>
-	<url>
 	<loc>http://tinhoc.local/laptop-c15.html</loc>
 		<priority>0.5</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-	<loc>http://tinhoc.local/hp-c16.html</loc>
-		<priority>0.5</priority>
-		<changefreq>weekly</changefreq>
-	</url>
-	<url>
 	<loc>http://tinhoc.local/dell-c17.html</loc>
-		<priority>0.5</priority>
-		<changefreq>weekly</changefreq>
-	</url>
-	<url>
-	<loc>http://tinhoc.local/linh-kien-game-c18.html</loc>
 		<priority>0.5</priority>
 		<changefreq>weekly</changefreq>
 	</url>
