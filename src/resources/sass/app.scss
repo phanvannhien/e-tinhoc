@@ -36,7 +36,7 @@ $slider-line-height: 10px;
 
 .container{
   @media only screen and (min-width: 1600px){
-    width: 80%;
+    max-width: 80%;
   }
 } 
 
