@@ -74,6 +74,9 @@ class Product extends Model
     }
 
     public function getPriceHTML(){
+        if( $this->price == 0 ){
+            return '<strong class="price">Liên hệ</strong>';
+        }
         if( $this->sale_price != 0 || $this->sale_price != '' ){
             $html = '<p><strong class="price">'.number_format($this->sale_price).'đ</strong>
                 <span class="regular-price">'.number_format($this->price).'đ</span></p>';

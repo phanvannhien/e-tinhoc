@@ -13,7 +13,7 @@
                 <div class="col-2 col-lg-3">
                     <div id="logo">
                         <a title="{{ config('app.name') }}" href="{{ url('/') }}">
-                            <img src="{{ app('Configuration')->get('logo') }}" alt="{{ config('app.name') }}" />
+                            <img class="img-fluid" src="{{ app('Configuration')->get('logo') }}" alt="{{ config('app.name') }}" />
                         </a>
                     </div>
                 </div>

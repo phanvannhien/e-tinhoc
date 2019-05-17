@@ -51,7 +51,7 @@
 
                 if($cat){
                     $products = Cache::remember( 'product-carousel-'.$cat_id  , 300 , function () use ($cat) {
-                        return $cat->products()->orderBy('created_at','DESC')->limit(10)->get();
+                        return $cat->products()->orderBy('created_at','DESC')->limit(12)->get();
                     });
                 }
             @endphp
@@ -59,7 +59,13 @@
             <section class="mb-4">
                 <div class="container">
                     <h3 class=""><a href="{{ $cat->getUrl() }}" title="{{ $cat->category_name }}">{{ $cat->category_name }}</a></h3>
-                    {!! view('theme.products.product_carousel', [ 'products' => $products ])->render() !!}
+                    <div class="row align-items-stretch ">
+                    @foreach ( $products as $product )
+                        <div class="col-6 col-md-3 mb-3">
+                            {!! view('theme.products.view',[ 'product' => $product ])->render() !!}
+                        </div>
+                    @endforeach
+                    </div>
                 </div>
             </section>
             @endif
