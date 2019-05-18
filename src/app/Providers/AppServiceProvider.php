@@ -19,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
             return new \App\Singletons\Configuration();
         });
 
+        $this->app->singleton('SEO', function () {
+            return new \App\Utils\SEO();
+        });
 
     }
 

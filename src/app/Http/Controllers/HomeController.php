@@ -55,45 +55,17 @@ class HomeController extends Controller
     public function index(Request $request, Agent $agent)
     {
         $expiresAt = now()->addMinutes(10);
-
-
         $blogcat = BlogCategory::findOrFail(1);
-
         $posts = Blog::whereHas('categories',function ($query) use ($blogcat){
             $query->where('blogcategory_id',  $blogcat->id );
         })->orderBy( 'created_at','DESC')->paginate();
-
-
-        $configuration = app('Configuration');
-
-        SEOMeta::setTitle( $configuration->get('site_title') );
-        SEOMeta::setDescription( $configuration->get('site_description') );
-        SEOMeta::addKeyword( $configuration->get('site_keywords') );
-        SEOMeta::setCanonical( $request->getUri() );
-
-        OpenGraph::setTitle( $configuration->get('site_title') );
-        OpenGraph::setDescription( $configuration->get('site_description') );
-        OpenGraph::setUrl( $request->getUri());
-        OpenGraph::addProperty('image:url',  $configuration->get('logo') );
-        OpenGraph::addProperty('image:alt', $configuration->get('site_title') );
-
-        OpenGraph::addProperty('type', 'website');
-        OpenGraph::addProperty('url', $request->getUri() );
-        OpenGraph::addProperty('locale', app()->getLocale() );
-        OpenGraph::addProperty('site_name', app('Configuration')->get('company_name') );
-
-        Twitter::setTitle( $configuration->get('site_title') );
-        Twitter::setImage( $configuration->get('logo')  );
-
         return view('theme.home', compact('posts','blogcat'));
     }
 
     public function category(ProductFilter $filter, Request $request, $slug, $id ){
 
         $request['category'] = array($id);
-
         $expiresAt = now()->addMinutes(10);
-
         if( Cache::has('category_'. $id ) ){
             $category = Cache::get('category_'. $id);
         }else{
@@ -117,28 +89,6 @@ class HomeController extends Controller
             $products = Product::filter($filter)->paginate();
         }
 
-
-        // SEO
-
-        SEOMeta::setTitle($category->category_name);
-        SEOMeta::setDescription( $category->meta_description );
-        SEOMeta::addKeyword( $category->meta_keyword );
-        SEOMeta::setCanonical( $request->getUri() );
-
-        OpenGraph::setDescription( $category->meta_description );
-        OpenGraph::setTitle( 'Website '.$category->category_name );
-        OpenGraph::setUrl( $request->getUri());
-        OpenGraph::addProperty('type', 'website');
-        OpenGraph::addProperty('image:url', $category->image );
-        OpenGraph::addProperty('image:alt', $category->category_name );
-        OpenGraph::addProperty('url', $request->getUri() );
-        OpenGraph::addProperty('description', $category->meta_description );
-        OpenGraph::addProperty('locale', app()->getLocale() );
-        OpenGraph::addProperty('site_name', app('Configuration')->get('company_name') );
-
-        Twitter::setTitle('Website '.$category->category_name);
-        Twitter::setImage( $category->image  );
-
         return view('theme.products.category', compact('categories','category', 'products'));
 
     }
@@ -156,7 +106,6 @@ class HomeController extends Controller
         }
         $product->increment('viewed');
 
-
         if( Cache::has('product_detail_'.$id.'_related' ) ){
             $related = Cache::get('product_detail_'.$id.'_related' );
         }else{
@@ -168,7 +117,6 @@ class HomeController extends Controller
                     ->orderBy('title','ASC')
                     ->limit(12)->get();
 
-
             }else{
                 $related = Product::whereHas('categories',function ($query) use ($currentCategory){
                     $query->whereIn('category_id', $currentCategory );
@@ -177,98 +125,25 @@ class HomeController extends Controller
                     ->limit(12)->get();
             }
 
-
             Cache::put('product_detail_'.$id.'_related' , $related, $expiresAt);
         }
-
-
-
-        SEOMeta::setTitle($product->title);
-        SEOMeta::setDescription($product->meta_description);
-        SEOMeta::addKeyword( $product->meta_keyword );
-        SEOMeta::setCanonical( $request->getUri() );
-
-        OpenGraph::setDescription($product->meta_description);
-        OpenGraph::setTitle($product->meta_title );
-        OpenGraph::setUrl( $request->getUri());
-        OpenGraph::addProperty('image:url', $product->thumbnail );
-        OpenGraph::addProperty('image:alt', $product->meta_description );
-        OpenGraph::addProperty('url', $request->getUri() );
-        OpenGraph::addProperty('description', $product->meta_description );
-        OpenGraph::addProperty('locale', app()->getLocale() );
-        OpenGraph::addProperty('site_name', app('Configuration')->get('company_name') );
-
-        // article
-        OpenGraph::setTitle($product->meta_title)
-            ->setDescription($product->meta_description  )
-            ->setType('article')
-            ->setArticle([
-                'published_time' => $product->created_at,
-                'modified_time' => $product->updated_at,
-                'section' => 'Website',
-                'tag' => $product->meta_title
-            ]);
-
-        Twitter::setTitle($product->meta_title);
-        Twitter::setImage(  $product->thumbnail  );
 
         return view('theme.products.detail', compact('product','related'));
     }
 
     public function pageDetail(Request $request, $slug, $id){
         $expiresAt = now()->addMinutes(10);
-
         if( Cache::has('page_'.$id ) ){
             $page = Cache::get('page_'.$id );
         }else{
             $page = Page::findOrFail($id);
             Cache::put('page_'. $id, $page, $expiresAt);
         }
-
-
-        SEOMeta::setTitle( $page->meta_title );
-        SEOMeta::setDescription($page->meta_description);
-        SEOMeta::addKeyword( $page->meta_keword );
-        SEOMeta::setCanonical( $request->getUri() );
-
-        OpenGraph::setTitle($page->meta_title );
-        OpenGraph::setDescription($page->meta_description);
-        
-        OpenGraph::setUrl( $request->getUri());
-        OpenGraph::addProperty('image:url', $page->thumbnail );
-        OpenGraph::addProperty('image:alt', $page->meta_description );
-        OpenGraph::addProperty('url', $request->getUri() );
-        OpenGraph::addProperty('description', $page->meta_description );
-        OpenGraph::addProperty('locale', app()->getLocale() );
-        OpenGraph::addProperty('site_name', app('Configuration')->get('site_title') );
-
-        // article
-        OpenGraph::setTitle($page->meta_title)
-            ->setDescription($page->meta_description  )
-            ->setType('article')
-            ->setArticle([
-                'published_time' => $page->created_at,
-                'modified_time' => $page->updated_at,
-                'author' => [
-                    'first_name' => 'Nhien',
-                    'last_name' => 'Nhien',
-                    'username' => 'jusephan',
-                    'gender' => 'male',
-                ],
-                'section' => 'Website',
-                'tag' => $page->meta_title
-            ]);
-
-        Twitter::setTitle($page->meta_title);
-        Twitter::setImage(  $page->thumbnail  );
-
         return view('theme.pages.page', compact('page'));
-
     }
 
     public function blogCategory( Request $request, $slug, $id ){
         $expiresAt = now()->addMinutes(10);
-
 
         if( Cache::has('blog_categories') ){
             $categories = Cache::get('blog_categories');
@@ -293,27 +168,7 @@ class HomeController extends Controller
                 $query->where('blogcategory_id',  $category->id );
             })->orderBy('created_at','DESC')->paginate();
         }
-
-        // SEO
-
-        SEOMeta::setTitle($category->meta_title);
-        SEOMeta::setDescription($category->meta_description);
-        SEOMeta::addKeyword( $category->meta_keyword );
-        SEOMeta::setCanonical( $request->getUri() );
-
-        OpenGraph::setDescription($category->meta_description);
-        OpenGraph::setTitle( 'Website '.$category->meta_title );
-        OpenGraph::setUrl( $request->getUri());
-        OpenGraph::addProperty('type', 'website');
-        OpenGraph::addProperty('image:url', $category->image );
-        OpenGraph::addProperty('image:alt', $category->meta_title );
-        OpenGraph::addProperty('url', $request->getUri() );
-        OpenGraph::addProperty('description', $category->meta_description );
-        OpenGraph::addProperty('locale', app()->getLocale() );
-        OpenGraph::addProperty('site_name', app('Configuration')->get('company_name') );
-
-        Twitter::setTitle('Website '.$category->meta_title);
-        Twitter::setImage(  $category->image  );
+        
         return view('theme.blogs.category', compact('categories', 'category', 'posts'));
     }
 
@@ -337,113 +192,17 @@ class HomeController extends Controller
         if( Cache::has('blog_detail_'.$id.'_related' ) ){
             $related = Cache::get('blog_detail_'.$id.'_related' );
         }else{
-
             $related = Blog::whereHas('categories',function ($query) use ($blog){
                 $query->where('blogcategory_id', $blog->categories()->pluck('blogcategory_id')->toArray() );
             })->where('id', '!=', $blog->id  )
                 ->orderBy('created_at','DESC')->paginate();
-
             Cache::put('blog_detail_'.$id.'_related' , $related, $expiresAt);
         }
-
-
-        SEOMeta::setTitle($blog->meta_title ?: $blog->blog_title  );
-        SEOMeta::setDescription( $blog->meta_description ?: strip_tags( $blog->blog_excerpt ) );
-        SEOMeta::addKeyword( $blog->meta_keyword ?: $blog->blog_title );
-        SEOMeta::setCanonical( $request->getUri() );
-
-        OpenGraph::setDescription($blog->meta_description ?: strip_tags( $blog->blog_excerpt ));
-        OpenGraph::setTitle($blog->meta_title ?: $blog->blog_title  );
-        OpenGraph::setUrl( $request->getUri());
-        OpenGraph::addProperty('image:url', $blog->blog_thumbnail );
-        OpenGraph::addProperty('image:alt', $blog->meta_description ?: strip_tags( $blog->blog_excerpt ) );
-        OpenGraph::addProperty('url', $request->getUri() );
-        OpenGraph::addProperty('description', $blog->meta_description ?: strip_tags( $blog->blog_excerpt ) );
-        OpenGraph::addProperty('locale', app()->getLocale() );
-        OpenGraph::addProperty('site_name', app('Configuration')->get('company_name') );
-
-        // article
-        OpenGraph::setTitle($blog->meta_title ?: $blog->blog_title )
-            ->setDescription( $blog->meta_description ?: strip_tags( $blog->blog_excerpt )  )
-            ->setType('article')
-            ->setArticle([
-                'published_time' => $blog->created_at,
-                'modified_time' => $blog->updated_at,
-                'author' => [
-                    'first_name' => 'Nhien',
-                    'last_name' => 'Nhien',
-                    'username' => 'jusephan',
-                    'gender' => 'male',
-                ],
-                'section' => 'Website',
-                'tag' => $blog->meta_title ?: $blog->blog_title
-            ]);
-
-        Twitter::setTitle($blog->meta_title ?: $blog->blog_title );
-        Twitter::setImage(  $blog->blog_thumbnail  );
 
         return view('theme.blogs.detail', compact('blog','categories','related'));
     }
 
-    public function template(Request $request){
-        $expiresAt = now()->addMinutes(10);
 
-        $paged = $request->has('page') ? $request->get('page') : 1;
-
-        if( Cache::has('templates') ){
-            $templates = Cache::get('templates'.$paged );
-        }else{
-            $templates = Product::paginate();
-            Cache::put('templates'. $paged, $templates, $expiresAt);
-        }
-
-        if( Cache::has('categories') ){
-            $categories = Cache::get('categories');
-        }else{
-            $categories = Category::whereNull('parent_id')->where('status',1)->get();
-            Cache::put('categories', $categories, $expiresAt);
-        }
-
-        OpenGraph::setUrl( $request->getUri());
-        OpenGraph::addProperty('image:url',  $configuration->get('logo') );
-        OpenGraph::addProperty('image:alt', app('Configuration')->get('site_title') );
-
-        OpenGraph::addProperty('type', 'website');
-        OpenGraph::addProperty('url', $request->getUri() );
-        OpenGraph::addProperty('locale', app()->getLocale() );
-        OpenGraph::addProperty('site_name', app('Configuration')->get('company_name') );
-
-        Twitter::setTitle( app('Configuration')->get('site_title') );
-        Twitter::setImage(  $configuration->get('logo') );
-
-
-        return view('theme.pages.templates', compact('templates', 'categories'));
-    }
-
-    public function client( Request $request ){
-        if( Cache::has('clients') ){
-            $clients = Cache::get('clients');
-        }else{
-            $expiresAt = now()->addMinutes(10);
-            $clients = Client::all();
-            Cache::put('clients', $clients, $expiresAt);
-        }
-
-        OpenGraph::setUrl( $request->getUri());
-        OpenGraph::addProperty('image:url',  $configuration->get('logo') );
-        OpenGraph::addProperty('image:alt', app('Configuration')->get('site_title') );
-
-        OpenGraph::addProperty('type', 'website');
-        OpenGraph::addProperty('url', $request->getUri() );
-        OpenGraph::addProperty('locale', app()->getLocale() );
-        OpenGraph::addProperty('site_name', app('Configuration')->get('company_name') );
-
-        Twitter::setTitle( app('Configuration')->get('site_title') );
-        Twitter::setImage(  $configuration->get('logo')  );
-
-
-        return view('theme.pages.clients', compact('clients'));
-    }
 
     public function contact(  Request $request ){
         if( Cache::has('stores') ){
@@ -452,20 +211,6 @@ class HomeController extends Controller
             $stores = Store::all();
             Cache::forever('stores', $stores);
         }
-
-        OpenGraph::setUrl( $request->getUri());
-        OpenGraph::addProperty('image:url',  $configuration->get('logo') );
-        OpenGraph::addProperty('image:alt', app('Configuration')->get('site_title') );
-
-        OpenGraph::addProperty('type', 'website');
-        OpenGraph::addProperty('url', $request->getUri() );
-        OpenGraph::addProperty('locale', app()->getLocale() );
-        OpenGraph::addProperty('site_name', app('Configuration')->get('company_name') );
-
-        Twitter::setTitle( app('Configuration')->get('site_title') );
-        Twitter::setImage(  $configuration->get('logo') );
-
-
         return view('theme.pages.contact', compact('stores'));
     }
 
@@ -479,7 +224,6 @@ class HomeController extends Controller
             'topic' => 'required|string',
         ];
 
-
         $validator = Validator::make($request->all(), $rules );
         if ($validator->fails()) {
             return back()->withErrors ( $validator )->withInput();
@@ -492,11 +236,8 @@ class HomeController extends Controller
         $contact->subject = $request->input('subject');
         $contact->message = $request->input('message');
         $contact->topic = $request->input('topic');
-
         $contact->save();
-
         return back()->with('status','Cám ơn bạn đã liên hệ');
-
     }
 
 

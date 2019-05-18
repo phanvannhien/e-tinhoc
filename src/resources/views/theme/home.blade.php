@@ -1,4 +1,7 @@
 @extends('theme.layouts.app')
+@section('seo')
+    {!! app('SEO')->generalSEO()->toHTML() !!}
+@stop
 @section('main')
     @php
         $slider = Cache::remember('slider', 300 , function () {

@@ -22,7 +22,7 @@ return [
         'title' => 'Thanh toán qua MoMo',
         'description' => '',
         'class' => 'App\Payment\MoMo',
-        'active' => true,
+        'active' => false,
         'fields' => [
             'sandbox' => [
                 'type' => 'text',

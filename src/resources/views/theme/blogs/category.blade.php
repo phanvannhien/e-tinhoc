@@ -1,4 +1,7 @@
 @extends('theme.layouts.app')
+@section('seo')
+    {!! app('SEO')->blogCategorySEO($category)->toHTML() !!}
+@stop
 @section('header')
     @php
         $schemaListItem = array();

@@ -1,6 +1,8 @@
 @extends('theme.layouts.app')
+@section('seo')
+    {!! app('SEO')->productDetailSEO($product)->toHTML() !!}
+@stop
 @section('main')
-
 <div id="breadcrumbs">
     <div class="container">
         {{ Breadcrumbs::render('contact') }}

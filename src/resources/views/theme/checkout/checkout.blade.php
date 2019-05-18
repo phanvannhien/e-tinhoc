@@ -1,4 +1,9 @@
 @extends('theme.layouts.app')
+@section('seo')
+    {!! app('SEO')->generalSEO([
+        'title' => 'Thanh toán'
+    ])->toHTML() !!}
+@stop
 @section('main')
 <div id="breadcrumbs">
     <div class="container">

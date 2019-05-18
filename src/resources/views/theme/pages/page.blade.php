@@ -1,5 +1,7 @@
 @extends('theme.layouts.app')
-
+@section('seo')
+    {!! app('SEO')->pageSEO( $page )->toHTML() !!}
+@stop
 @section('main')
 <div id="breadcrumbs">
     <div class="container">

@@ -1,4 +1,7 @@
 @extends('theme.layouts.app')
+@section('seo')
+    {!! app('SEO')->productDetailSEO($product)->toHTML() !!}
+@stop
 @inject('agent','Jenssegers\Agent\Agent')
 @section('header')
 

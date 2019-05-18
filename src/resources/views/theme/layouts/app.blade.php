@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css">
     <link rel="stylesheet" href="{{ url('css/app.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    {!! SEO::generate() !!}
-
+    @yield('seo')
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -96,17 +95,9 @@
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','IDDDD');</script>
+    })(window,document,'script','dataLayer','{{ app('Configuration')->get('gtm_id') }}');</script>
     <!-- End Google Tag Manager -->
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=IDDDD"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'IDDDD');
-    </script>
 </head>
 <body>
     <!-- Load Facebook SDK for JavaScript -->
@@ -120,12 +111,12 @@
     }(document, 'script', 'facebook-jssdk'));</script>
     @php
         $primaryNav =  Cache::remember('menu-primary', 60, function () {
-            return \App\Models\MenuItems::where('menu_id', 1 )->where('menu_status', 1)->orderBy('_lft')->get()->toTree();
+            return \App\Models\MenuItems::where('menu_id', 1 )
+                ->where('menu_status', 1)->orderBy('_lft')->get()->toTree();
         });
-
-
         $topNav =  Cache::remember('menu-top', 60, function () {
-           return \App\Models\MenuItems::where('menu_id', 11 )->where('menu_status', 1)->orderBy('_lft')->get()->toTree();
+           return \App\Models\MenuItems::where('menu_id', 11 )
+                ->where('menu_status', 1)->orderBy('_lft')->get()->toTree();
         });
 
     @endphp
@@ -147,19 +138,16 @@
             </div>
         </div>
     </div>
-
     @if( ! auth()->check() )
         @include('theme.auth.popup.login')
         @include('theme.auth.popup.register')
     @endif
     @include('theme.cart.popup-cart')
-
     @if( Agent::isMobile() )
     <div id="mobile-nav">
         {!! App\Utils\Category::renderMenuHTML( $primaryNav, 'primary-menu' ) !!}
     </div>
     @endif
-
     <script src="{{ url('js/app.js') }}"></script>
     @yield('footer')
     {!! app('Configuration')->get('tawkto') !!}
