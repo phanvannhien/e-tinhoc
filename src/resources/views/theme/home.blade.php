@@ -54,7 +54,7 @@
 
                 if($cat){
                     $products = Cache::remember( 'product-carousel-'.$cat_id  , 300 , function () use ($cat) {
-                        return $cat->products()->orderBy('created_at','DESC')->limit(12)->get();
+                        return $cat->products()->orderBy('created_at','DESC')->limit(8)->get();
                     });
                 }
             @endphp
