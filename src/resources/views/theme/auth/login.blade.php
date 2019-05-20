@@ -97,7 +97,6 @@
 						</div>
 					</div>
 
-
 					<button id="btn-register" class="btn btn-info">@lang('customer.register')</button>
 
 				</form>

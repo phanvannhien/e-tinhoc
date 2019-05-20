@@ -30,7 +30,7 @@
 						</div>
 					</div>
 				</form>
-				<hr>
+	
 				@include('theme.auth.social')
 			</div>
 		</div>

@@ -14,6 +14,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
+use App\Notifications\ResetPasswordNotification;
 
 class User extends Authenticatable
 {
@@ -52,6 +53,13 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
+
 
     //
 
