@@ -111,12 +111,19 @@
     }(document, 'script', 'facebook-jssdk'));</script>
     @php
         $primaryNav =  Cache::remember('menu-primary', 60, function () {
-            return \App\Models\MenuItems::where('menu_id', 1 )
-                ->where('menu_status', 1)->orderBy('_lft')->get()->toTree();
+            $menu = \App\Models\Menu::where('menu_code', 'menu_primary')->first();
+            if($menu)
+                return \App\Models\MenuItems::where('menu_id', $menu->id )
+                    ->where('menu_status', 1)->orderBy('_lft')->get()->toTree();
+
+            return false;
         });
         $topNav =  Cache::remember('menu-top', 60, function () {
-           return \App\Models\MenuItems::where('menu_id', 11 )
-                ->where('menu_status', 1)->orderBy('_lft')->get()->toTree();
+            $menu = \App\Models\Menu::where('menu_code', 'menu_top')->first();
+            if( $menu )
+                return \App\Models\MenuItems::where('menu_id', $menu->id  )
+                    ->where('menu_status', 1)->orderBy('_lft')->get()->toTree();
+            return false;
         });
 
     @endphp
